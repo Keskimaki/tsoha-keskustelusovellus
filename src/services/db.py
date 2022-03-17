@@ -16,12 +16,15 @@ def get_db_connection():
     return conn
 
 def query_db(query, arguments=(), get_one=False):
+    """Send SQL query to database return a dictionary or a list of dictionaries"""
     conn = get_db_connection()
     cur = conn.cursor()
 
     cur.execute(query, arguments)
-    res = [ dict((cur.description[i][0], value) \
-               for i, value in enumerate(row)) for row in cur.fetchall() ]
+    # Turn SQL rows into equivalent Python dictionary
+    res = [ dict((cur.description[i][0], value)
+            for i, value in enumerate(row))
+            for row in cur.fetchall() ]
 
     cur.close()
     conn.close()
