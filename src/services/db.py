@@ -14,3 +14,16 @@ def get_db_connection():
     )
 
     return conn
+
+def query_db(query, arguments=(), get_one=False):
+    conn = get_db_connection()
+    cur = conn.cursor()
+
+    cur.execute(query, arguments)
+    res = [ dict((cur.description[i][0], value) \
+               for i, value in enumerate(row)) for row in cur.fetchall() ]
+
+    cur.close()
+    conn.close()
+
+    return (res[0] if res else None) if get_one else res
