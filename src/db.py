@@ -1,3 +1,5 @@
+"""Placeholder file for a database connection."""
+
 import psycopg2
 
 conn = psycopg2.connect("dbname=tsoha user=miko")
