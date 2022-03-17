@@ -1,7 +1,7 @@
 """Create user schema and initialize database"""
 
 from config import DB_PASSWORD
-from db import get_db_connection
+from services.db import get_db_connection
 
 conn = get_db_connection()
 
@@ -21,7 +21,7 @@ cur.execute("""
 )
 
 cur.execute(
-    "INSERT INTO Users (username, password, admin) VALUES (%s, %s, %s)",
+    "INSERT INTO Users (username, password, admin) VALUES (%s, %s, %s);",
     ( "admin", DB_PASSWORD, True )
 )
 
