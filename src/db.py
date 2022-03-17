@@ -6,15 +6,15 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-conn = psycopg2.connect(
-    host="localhost",
-    database="tsoha",
-    user=os.getenv("DB_USERNAME"),
-    password=os.getenv("DB_PASSWORD")
-)
+DB_USERNAME = os.getenv("DB_USERNAME")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
 
-cur = conn.cursor()
+def get_db_connection():
+    conn = psycopg2.connect(
+        host = "localhost",
+        database = "tsoha",
+        user = DB_USERNAME,
+        password = DB_PASSWORD
+    )
 
-cur.execute("SELECT * FROM Users")
-
-records = cur.fetchone()
+    return conn
