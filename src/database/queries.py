@@ -10,7 +10,7 @@ DROP_TABLES = """
 CREATE_USER_TABLE = """
     CREATE TABLE Users (
         id SERIAL PRIMARY KEY,
-        username TEXT NOT NULL,
+        username TEXT NOT NULL UNIQUE,
         password TEXT NOT NULL,
         admin BOOLEAN DEFAULT FALSE,
         time TIME DEFAULT CURRENT_TIMESTAMP(0)
@@ -20,7 +20,7 @@ CREATE_USER_TABLE = """
 CREATE_BOARD_TABLE = """
     CREATE TABLE Boards (
         id SERIAL PRIMARY KEY,
-        name TEXT NOT NULL,
+        name TEXT NOT NULL UNIQUE,
         description TEXT NOT NULL,
         private BOOLEAN DEFAULT FALSE,
         time TIME DEFAULT CURRENT_TIMESTAMP(0)
@@ -32,7 +32,7 @@ CREATE_THREAD_TABLE = """
         id SERIAL PRIMARY KEY,
         user_id INTEGER REFERENCES Users NOT NULL,
         board_id INTEGER REFERENCES Boards NOT NULL,
-        name TEXT NOT NULL,
+        name TEXT NOT NULL UNIQUE,
         closed BOOLEAN DEFAULT FALSE,
         time TIME DEFAULT CURRENT_TIMESTAMP(0)
     );
