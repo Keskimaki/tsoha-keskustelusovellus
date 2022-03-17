@@ -1,11 +1,13 @@
-drop_tables = """
+"""Queries for PostgeSQL database"""
+
+DROP_TABLES = """
     DROP TABLE IF EXISTS Posts;
     DROP TABLE IF EXISTS Threads;
     DROP TABLE IF EXISTS Boards;
     DROP TABLE IF EXISTS Users;
 """
 
-create_users_table = """
+CREATE_USER_TABLE = """
     CREATE TABLE Users (
         id SERIAL PRIMARY KEY,
         username TEXT NOT NULL,
@@ -15,7 +17,7 @@ create_users_table = """
     );
 """
 
-create_boards_table = """
+CREATE_BOARD_TABLE = """
     CREATE TABLE Boards (
         id SERIAL PRIMARY KEY,
         name TEXT NOT NULL,
@@ -25,7 +27,7 @@ create_boards_table = """
     );
 """
 
-create_threads_table = """
+CREATE_THREAD_TABLE = """
     CREATE TABLE Threads (
         id SERIAL PRIMARY KEY,
         user_id INTEGER REFERENCES Users NOT NULL,
@@ -37,7 +39,7 @@ create_threads_table = """
 """
 
 # TODO Expand with more features? ~ editing, replies
-create_posts_table = """
+CREATE_POST_TABLE = """
     CREATE TABLE Posts (
         id SERIAL PRIMARY KEY,
         user_id INTEGER REFERENCES Users NOT NULL,

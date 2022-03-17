@@ -1,24 +1,24 @@
-"""Create user schema and initialize database"""
+"""Initialize database"""
 
-import sys, os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
-
+import sys
+import os
 from werkzeug.security import generate_password_hash
-
+sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+#pylint: disable=wrong-import-position, import-error
+import queries
 from config import DB_PASSWORD
 from services.db import get_db_connection
-import queries
 
 conn = get_db_connection()
 
 cur = conn.cursor()
 
-cur.execute(queries.drop_tables)
+cur.execute(queries.DROP_TABLES)
 
-cur.execute(queries.create_users_table)
-cur.execute(queries.create_boards_table)
-cur.execute(queries.create_threads_table)
-cur.execute(queries.create_posts_table)
+cur.execute(queries.CREATE_USER_TABLE)
+cur.execute(queries.CREATE_BOARD_TABLE)
+cur.execute(queries.CREATE_THREAD_TABLE)
+cur.execute(queries.CREATE_POST_TABLE)
 
 cur.execute(
     "INSERT INTO Users (username, password, admin) VALUES (%s, %s, %s);",
