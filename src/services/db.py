@@ -30,3 +30,14 @@ def query_db(query, arguments=(), get_one=False):
     conn.close()
 
     return (res[0] if res else None) if get_one else res
+
+def insert_to_db(query, arguments):
+    """Insert given values into the database"""
+    conn = get_db_connection()
+    cur = conn.cursor()
+
+    cur.execute(query, arguments)
+    conn.commit()
+
+    cur.close()
+    conn.close()
