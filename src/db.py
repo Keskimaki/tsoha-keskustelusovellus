@@ -1,8 +1,17 @@
-"""Placeholder file for a database connection."""
+"""Connects to PostgreSQL db and executes a placeholder query"""
 
+import os
 import psycopg2
+from dotenv import load_dotenv
 
-conn = psycopg2.connect("dbname=tsoha user=miko")
+load_dotenv()
+
+conn = psycopg2.connect(
+    host="localhost",
+    database="tsoha",
+    user=os.getenv("DB_USERNAME"),
+    password=os.getenv("DB_PASSWORD")
+)
 
 cur = conn.cursor()
 
