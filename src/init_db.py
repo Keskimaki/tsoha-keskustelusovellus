@@ -9,6 +9,7 @@ cur = conn.cursor()
 
 cur.execute("DROP TABLE IF EXISTS users;")
 
+# TODO Replace plaintext password with passwordhash
 cur.execute("""
     CREATE TABLE Users (
         id SERIAL PRIMARY KEY,
