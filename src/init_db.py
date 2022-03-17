@@ -1,14 +1,7 @@
 """Create user schema and initialize database"""
 
-import os
-from dotenv import load_dotenv
-
+from config import DB_PASSWORD
 from db import get_db_connection
-
-load_dotenv()
-
-DB_USERNAME = os.getenv("DB_USERNAME")
-DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 conn = get_db_connection()
 
