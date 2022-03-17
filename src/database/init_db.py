@@ -3,6 +3,7 @@
 import sys
 import os
 from werkzeug.security import generate_password_hash
+# Allow imports from parent directory
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 #pylint: disable=wrong-import-position, import-error
 import queries

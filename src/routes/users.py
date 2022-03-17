@@ -14,6 +14,16 @@ def get_users():
 
     return json_response(users)
 
+@app.route("/api/users/<int:user_id>", methods=["GET"])
+def get_user(user_id):
+    """Return a single user by id"""
+    user = query_db("SELECT * FROM Users WHERE id=%s;", ( str(user_id) ), get_one=True)
+
+    if not user:
+        return Response(status=404)
+
+    return json_response(user)
+
 @app.route("/api/users", methods=["POST"])
 def create_user():
     """Create a new user"""
