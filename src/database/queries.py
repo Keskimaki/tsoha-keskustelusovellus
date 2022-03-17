@@ -1,3 +1,10 @@
+drop_tables = """
+    DROP TABLE IF EXISTS Posts;
+    DROP TABLE IF EXISTS Threads;
+    DROP TABLE IF EXISTS Boards;
+    DROP TABLE IF EXISTS Users;
+"""
+
 create_users_table = """
     CREATE TABLE Users (
         id SERIAL PRIMARY KEY,

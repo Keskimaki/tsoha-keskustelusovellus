@@ -7,21 +7,18 @@ from werkzeug.security import generate_password_hash
 
 from config import DB_PASSWORD
 from services.db import get_db_connection
-from queries import create_users_table, create_boards_table, create_threads_table, create_posts_table
+import queries
 
 conn = get_db_connection()
 
 cur = conn.cursor()
 
-cur.execute("DROP TABLE IF EXISTS Posts;")
-cur.execute("DROP TABLE IF EXISTS Threads;")
-cur.execute("DROP TABLE IF EXISTS Boards;")
-#cur.execute("DROP TABLE IF EXISTS Users;")
+cur.execute(queries.drop_tables)
 
-cur.execute(create_users_table)
-cur.execute(create_boards_table)
-cur.execute(create_threads_table)
-cur.execute(create_posts_table)
+cur.execute(queries.create_users_table)
+cur.execute(queries.create_boards_table)
+cur.execute(queries.create_threads_table)
+cur.execute(queries.create_posts_table)
 
 cur.execute(
     "INSERT INTO Users (username, password, admin) VALUES (%s, %s, %s);",
