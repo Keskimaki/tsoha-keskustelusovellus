@@ -1,19 +1,19 @@
 """Router for user related api requests"""
 
+import json
+from flask import Response
+
 from app import app
-from services.db import get_db_connection
+from services.db import query_db
 
 @app.route("/api/users")
 def get_users():
-    """Return all users, currently unsafe plaintext passwords"""
-    conn = get_db_connection()
-    cur = conn.cursor()
+    """Return all users as JSON"""
 
-    cur.execute("SELECT * FROM Users;")
-    users = cur.fetchall()
+    users = query_db("SELECT * FROM Users;")
 
-    cur.close()
-    conn.close()
+    for user in users:
+        user.update({ "time": str(user["time"]) })
 
-    # TODO Turn Postgre data into JSON
-    return str(users)
+    return Response(json.dumps(users), mimetype='application/json')
+
