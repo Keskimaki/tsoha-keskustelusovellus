@@ -1,4 +1,4 @@
-"""Starts the application."""
+"""Start the application"""
 
 from flask import Flask
 

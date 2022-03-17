@@ -15,6 +15,6 @@ conn = psycopg2.connect(
 
 cur = conn.cursor()
 
-cur.execute("SELECT * FROM testi")
+cur.execute("SELECT * FROM Users")
 
 records = cur.fetchone()

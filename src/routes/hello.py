@@ -1,4 +1,4 @@
-"""Simple placeholder router."""
+"""Simple placeholder router"""
 
 from app import app
 

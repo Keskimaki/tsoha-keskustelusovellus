@@ -1,3 +1,5 @@
+"""Create user schema and initialize database"""
+
 import os
 import psycopg2
 from dotenv import load_dotenv
@@ -8,10 +10,10 @@ DB_USERNAME = os.getenv("DB_USERNAME")
 DB_PASSWORD= os.getenv("DB_PASSWORD")
 
 conn = psycopg2.connect(
-    host="localhost",
-    database="tsoha",
-    user=DB_USERNAME,
-    password=DB_PASSWORD
+    host = "localhost",
+    database = "tsoha",
+    user = DB_USERNAME,
+    password = DB_PASSWORD
 )
 
 cur = conn.cursor()
