@@ -1,6 +1,6 @@
 """Login router"""
 
-from flask import Response, request
+from flask import request
 from flask_jwt_extended import create_access_token
 
 from services.db import query_db
@@ -14,11 +14,11 @@ def login_user():
     user = query_db("SELECT * FROM Users WHERE username=%s;", ( body["username"], ), get_one=True)
 
     if not user:
-        return Response(status=404)
+        return { "message": "User not found" }, 401
 
     if bcrypt.check_password_hash(user["password_hash"], body["password"]):
         jwt = create_access_token(body["username"])
 
         return { "access_token": jwt }
     else:
-        return { "message": "Invalid password" }, 404
+        return { "message": "Invalid password" }, 401
