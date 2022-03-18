@@ -15,6 +15,7 @@ CREATE_USER_TABLE = """
         admin BOOLEAN DEFAULT FALSE,
         time TIME DEFAULT CURRENT_TIMESTAMP(0)
     );
+    CREATE UNIQUE INDEX username_idx ON Users (username);
 """
 
 # TODO Add individual users to private boards
