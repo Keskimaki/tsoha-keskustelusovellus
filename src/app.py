@@ -18,3 +18,4 @@ from routes import users
 from routes import login
 from routes import boards
 from routes import threads
+from routes import posts

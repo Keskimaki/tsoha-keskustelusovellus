@@ -1,7 +1,7 @@
 """Router for thread related api requests"""
 
 from flask import request
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required
 
 from app import app
 from services.db import query_db, insert_into_db
