@@ -1,6 +1,7 @@
 """Router for user related api requests"""
 
-from flask import Response, request
+from flask import request
+from flask_jwt_extended import create_access_token
 
 from app import app, bcrypt
 from services.db import query_db, insert_into_db
@@ -33,4 +34,6 @@ def create_user():
         ( body["username"], bcrypt.generate_password_hash(body["password"]).decode("utf8") )
     )
 
-    return Response(status=201)
+    jwt = create_access_token(body["username"])
+
+    return { "access_token": jwt }, 201
