@@ -19,7 +19,7 @@ def get_user(user_id):
     user = query_db("SELECT * FROM Users WHERE id=%s;", ( str(user_id), ), True)
 
     if not user:
-        return Response(status=404)
+        return { "msg": "User not found" }, 404
 
     return json_response(user)
 

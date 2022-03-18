@@ -14,11 +14,11 @@ def login_user():
     user = query_db("SELECT * FROM Users WHERE username=%s;", ( body["username"], ), True)
 
     if not user:
-        return { "message": "User not found" }, 401
+        return { "msg": "User not found" }, 404
 
     if bcrypt.check_password_hash(user["password_hash"], body["password"]):
         jwt = create_access_token(body["username"])
 
         return { "access_token": jwt }
     else:
-        return { "message": "Invalid password" }, 401
+        return { "msg": "Invalid password" }, 401
