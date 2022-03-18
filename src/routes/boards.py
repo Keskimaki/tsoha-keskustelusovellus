@@ -44,6 +44,7 @@ def create_board():
     return { "msg": f"Board {body['name']} created" }, 201
 
 def check_admin():
+    """Get username from session and check admin status"""
     identity = get_jwt_identity()
     user = query_db("SELECT admin FROM Users WHERE username=%s;", ( identity, ), True)
 

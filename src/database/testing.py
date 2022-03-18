@@ -1,7 +1,10 @@
+"""Data and functions for database testing"""
+
 from app import bcrypt
 from config import DB_PASSWORD
 
 def insert_test_data(cur):
+    """Add one user, board, thread and post to database"""
     cur.execute(
         "INSERT INTO Users (username, password_hash, admin) VALUES (%s, %s, %s);",
         ( "admin", bcrypt.generate_password_hash(DB_PASSWORD).decode("utf8"), True )
