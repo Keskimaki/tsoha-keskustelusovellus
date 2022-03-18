@@ -21,6 +21,7 @@ def query_db(query, arguments=(), get_one=False):
     cur = conn.cursor()
 
     cur.execute(query, arguments)
+
     # Turn SQL rows into equivalent Python dictionary
     res = [ dict((cur.description[i][0], value)
             for i, value in enumerate(row))
@@ -31,7 +32,7 @@ def query_db(query, arguments=(), get_one=False):
 
     return (res[0] if res else None) if get_one else res
 
-def insert_to_db(query, arguments):
+def insert_into_db(query, arguments):
     """Insert given values into the database"""
     conn = get_db_connection()
     cur = conn.cursor()

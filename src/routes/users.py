@@ -4,7 +4,7 @@ from flask import Response, request
 from werkzeug.security import generate_password_hash
 
 from app import app
-from services.db import query_db, insert_to_db
+from services.db import query_db, insert_into_db
 from services.response import json_response
 
 @app.route("/api/users", methods=["GET"])
@@ -29,7 +29,7 @@ def create_user():
     """Create a new user"""
     body = request.json
 
-    insert_to_db(
+    insert_into_db(
         "INSERT INTO Users (username, password) VALUES (%s, %s);",
         ( body["username"], generate_password_hash(body["password"]) )
     )
