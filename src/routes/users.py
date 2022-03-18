@@ -16,7 +16,7 @@ def get_users():
 @app.route("/api/users/<int:user_id>", methods=["GET"])
 def get_user(user_id):
     """Return a single user by id"""
-    user = query_db("SELECT * FROM Users WHERE id=%s;", ( str(user_id), ), get_one=True)
+    user = query_db("SELECT * FROM Users WHERE id=%s;", ( str(user_id), ), True)
 
     if not user:
         return Response(status=404)
@@ -30,7 +30,7 @@ def create_user():
 
     insert_into_db(
         "INSERT INTO Users (username, password_hash) VALUES (%s, %s);",
-        ( body["username"], bcrypt.generate_password_hash(body["password"]) )
+        ( body["username"], bcrypt.generate_password_hash(body["password"]).decode("utf8") )
     )
 
     return Response(status=201)

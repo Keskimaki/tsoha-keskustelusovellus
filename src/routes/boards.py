@@ -1,6 +1,7 @@
 """Router for board related api requests"""
 
 from flask import Response, request
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from app import app
 from services.db import query_db, insert_into_db
@@ -16,17 +17,20 @@ def get_boards():
 @app.route("/api/boards/<int:board_id>", methods=["GET"])
 def get_board(board_id):
     """Return a single board by id"""
-    board = query_db("SELECT * FROM Boards WHERE id=%s", ( str(board_id) ), get_one=True)
+    board = query_db("SELECT * FROM Boards WHERE id=%s", ( str(board_id) ), True)
 
     if not board:
         return Response(status=404)
 
     return json_response(board)
 
-# TODO Admin authentication
 @app.route("/api/boards", methods=["POST"])
+@jwt_required()
 def create_board():
     """Allow admins to create boards"""
+    if not check_admin():
+        return { "message": "Administrator privileges required" }, 401
+
     body = request.json
 
     if not "private" in body:
@@ -38,3 +42,9 @@ def create_board():
     )
 
     return Response(status=201)
+
+def check_admin():
+    identity = get_jwt_identity()
+    user = query_db("SELECT admin FROM Users WHERE username=%s;", ( identity, ), True)
+
+    return user["admin"]

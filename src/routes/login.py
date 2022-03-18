@@ -11,7 +11,7 @@ def login_user():
     """Authenticate user, create JWT for user session"""
     body = request.json
 
-    user = query_db("SELECT * FROM Users WHERE username=%s;", ( body["username"], ), get_one=True)
+    user = query_db("SELECT * FROM Users WHERE username=%s;", ( body["username"], ), True)
 
     if not user:
         return { "message": "User not found" }, 401
