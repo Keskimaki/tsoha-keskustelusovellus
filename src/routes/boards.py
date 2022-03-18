@@ -17,7 +17,7 @@ def get_boards():
 @app.route("/api/boards/<int:board_id>", methods=["GET"])
 def get_board(board_id):
     """Return a single board by id"""
-    board = query_db("SELECT * FROM Boards WHERE id=%s", ( str(board_id) ), True)
+    board = query_db("SELECT * FROM Boards WHERE id=%s;", ( str(board_id), ), True)
 
     if not board:
         return { "msg": "Board not found" }, 404

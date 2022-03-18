@@ -5,8 +5,8 @@ import os
 # Allow imports from parent directory
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 #pylint: disable=wrong-import-position, import-error
-from app import bcrypt
 import queries
+from app import bcrypt
 from config import DB_PASSWORD
 from services.db import get_db_connection
 
