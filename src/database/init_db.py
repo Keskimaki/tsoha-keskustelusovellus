@@ -23,7 +23,7 @@ cur.execute(queries.CREATE_POST_TABLE)
 
 cur.execute(
     "INSERT INTO Users (username, password_hash, admin) VALUES (%s, %s, %s);",
-    ( "admin", bcrypt.generate_password_hash(DB_PASSWORD), True )
+    ( "admin", bcrypt.generate_password_hash(DB_PASSWORD).decode("utf8"), True )
 )
 
 cur.execute(

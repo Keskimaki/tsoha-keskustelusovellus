@@ -16,7 +16,7 @@ def get_users():
 @app.route("/api/users/<int:user_id>", methods=["GET"])
 def get_user(user_id):
     """Return a single user by id"""
-    user = query_db("SELECT * FROM Users WHERE id=%s;", ( str(user_id) ), get_one=True)
+    user = query_db("SELECT * FROM Users WHERE id=%s;", ( str(user_id), ), get_one=True)
 
     if not user:
         return Response(status=404)
