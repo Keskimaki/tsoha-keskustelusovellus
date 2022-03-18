@@ -17,6 +17,7 @@ CREATE_USER_TABLE = """
     );
 """
 
+# TODO Add individual users to private boards
 CREATE_BOARD_TABLE = """
     CREATE TABLE Boards (
         id SERIAL PRIMARY KEY,

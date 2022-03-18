@@ -6,3 +6,4 @@ app = Flask(__name__)
 
 #pylint: disable=wrong-import-position, unused-import
 from routes import users
+from routes import boards

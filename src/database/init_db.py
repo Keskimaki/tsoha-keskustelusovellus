@@ -26,6 +26,11 @@ cur.execute(
     ( "admin", generate_password_hash(DB_PASSWORD), True )
 )
 
+cur.execute(
+    "INSERT INTO Boards (name, description, private) VALUES (%s, %s, %s);",
+    ( "TEST", "testing area", True )
+)
+
 conn.commit()
 
 cur.close()
