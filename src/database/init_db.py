@@ -2,10 +2,10 @@
 
 import sys
 import os
-from werkzeug.security import generate_password_hash
 # Allow imports from parent directory
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 #pylint: disable=wrong-import-position, import-error
+from app import bcrypt
 import queries
 from config import DB_PASSWORD
 from services.db import get_db_connection
@@ -22,8 +22,8 @@ cur.execute(queries.CREATE_THREAD_TABLE)
 cur.execute(queries.CREATE_POST_TABLE)
 
 cur.execute(
-    "INSERT INTO Users (username, password, admin) VALUES (%s, %s, %s);",
-    ( "admin", generate_password_hash(DB_PASSWORD), True )
+    "INSERT INTO Users (username, password_hash, admin) VALUES (%s, %s, %s);",
+    ( "admin", bcrypt.generate_password_hash(DB_PASSWORD), True )
 )
 
 cur.execute(

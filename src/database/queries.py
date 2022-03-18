@@ -11,7 +11,7 @@ CREATE_USER_TABLE = """
     CREATE TABLE Users (
         id SERIAL PRIMARY KEY,
         username TEXT NOT NULL UNIQUE,
-        password TEXT NOT NULL,
+        password_hash TEXT NOT NULL,
         admin BOOLEAN DEFAULT FALSE,
         time TIME DEFAULT CURRENT_TIMESTAMP(0)
     );

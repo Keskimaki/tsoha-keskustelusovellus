@@ -1,9 +1,8 @@
 """Router for user related api requests"""
 
 from flask import Response, request
-from werkzeug.security import generate_password_hash
 
-from app import app
+from app import app, bcrypt
 from services.db import query_db, insert_into_db
 from services.response import json_response
 
@@ -30,8 +29,8 @@ def create_user():
     body = request.json
 
     insert_into_db(
-        "INSERT INTO Users (username, password) VALUES (%s, %s);",
-        ( body["username"], generate_password_hash(body["password"]) )
+        "INSERT INTO Users (username, password_hash) VALUES (%s, %s);",
+        ( body["username"], bcrypt.generate_password_hash(body["password"]) )
     )
 
     return Response(status=201)
