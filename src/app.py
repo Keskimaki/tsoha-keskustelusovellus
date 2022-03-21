@@ -13,10 +13,6 @@ jwt = JWTManager(app)
 
 bcrypt = Bcrypt(app)
 
-@app.route("/")
-def hello():
-    return "<p>Hello, World!</p>"
-
 #pylint: disable=wrong-import-position, unused-import
 from routes import users
 from routes import login
