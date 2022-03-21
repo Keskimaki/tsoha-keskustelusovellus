@@ -2,14 +2,13 @@ version: "3.8"
 
 services:
   tsoha-server-dev:
-    build: .
+    build: server
     depends_on:
       - postgres
-    command: poetry run python3 -m flask run --host=0.0.0.0
     ports:
       - 5000:5000
     volumes:
-      - ./:/usr/src/app
+      - ./server:/usr/src/app
   postgres:
     image: postgres:alpine
     restart: unless-stopped
