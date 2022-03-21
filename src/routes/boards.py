@@ -32,7 +32,7 @@ def create_board():
         return { "msg": "Administrator privileges required" }, 401
 
     body = request.json
-
+    # TODO Move to parsing
     if not "private" in body:
         body["private"] = False
 
