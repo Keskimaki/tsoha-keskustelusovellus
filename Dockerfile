@@ -11,4 +11,4 @@ RUN apk add --no-cache gcc libffi-dev musl-dev postgresql-dev && \
 
 COPY . .
 
-CMD [ "poetry", "run", "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+CMD poetry run python3 -m flask run --host=0.0.0.0
