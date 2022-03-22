@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+
+import Boards from './components/Boards'
+import { getBoards } from './services/boards'
 
 const App = () => {
   const [boards, setBoards] = useState([])
 
-  const getBoards = async () => {
-    const res = await axios.get('http://localhost:5000/api/boards')
-    setBoards(res.data)
-  }
-
-  useEffect(() => {
-    getBoards()
+  useEffect(async () => {
+    const data = await getBoards()
+    setBoards(data)
   }, [])
 
   return (
     <div>
-      {boards.map(board => <p key={board.name}>{board.name} {board.description}</p>)}
+      <Boards boards={boards} />
     </div>
   )
 }
