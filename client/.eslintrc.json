@@ -18,6 +18,7 @@
         "react"
     ],
     "rules": {
+        "brace-style": "off"
     },
     "settings": {
         "react": {
