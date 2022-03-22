@@ -24,6 +24,16 @@ def get_board(board_id):
 
     return json_response(board)
 
+@app.route("/api/boards/<string:board_name>", methods=["GET"])
+def get_board_id(board_name):
+    """Return board id from board name"""
+    board_id = query_db("SELECT id FROM Boards WHERE name=%s", ( board_name, ), True)
+
+    if not board_id:
+        return { "msg": "Board not found" }, 404
+
+    return json_response(board_id)
+
 @app.route("/api/boards", methods=["POST"])
 @jwt_required()
 def create_board():
