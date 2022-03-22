@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Routes, Route } from "react-router-dom"
 
 import Boards from './components/Boards'
 import { getBoards } from './services/boards'
@@ -13,7 +14,9 @@ const App = () => {
 
   return (
     <div>
-      <Boards boards={boards} />
+      <Routes>
+        <Route path="" element={<Boards boards={boards} />} />
+      </Routes>
     </div>
   )
 }
