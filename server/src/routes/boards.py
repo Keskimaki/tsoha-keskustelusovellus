@@ -1,10 +1,11 @@
 """Router for board related api requests"""
 
 from flask import request
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required
 
 from app import app
 from services.db import query_db, insert_into_db
+from services.user import check_admin
 from services.response import json_response
 
 @app.route("/api/boards", methods=["GET"])
@@ -52,10 +53,3 @@ def create_board():
     )
 
     return { "msg": f"Board {body['name']} created" }, 201
-
-def check_admin():
-    """Get username from session and check admin status"""
-    identity = get_jwt_identity()
-    user = query_db("SELECT admin FROM Users WHERE username=%s;", ( identity, ), True)
-
-    return user["admin"]

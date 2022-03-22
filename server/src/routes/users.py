@@ -5,6 +5,7 @@ from flask_jwt_extended import create_access_token
 
 from app import app, bcrypt
 from services.db import query_db, insert_into_db
+from services.user import generate_user_session
 from services.response import json_response
 
 @app.route("/api/users", methods=["GET"])
@@ -36,4 +37,4 @@ def create_user():
 
     jwt = create_access_token(body["username"])
 
-    return { "access_token": jwt }, 201
+    return generate_user_session(jwt, body["username"]), 201
