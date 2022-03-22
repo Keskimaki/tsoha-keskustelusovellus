@@ -13,6 +13,8 @@ const Login = () => {
     setToken(data.access_token)
   }
 
+  console.log(token)
+
   return (
     <div>
       <h1>Login</h1>

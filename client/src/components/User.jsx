@@ -1,7 +1,7 @@
 import React from 'react'
 import { Formik, Field, Form } from 'formik'
 
-import { createUser } from '../services/user' 
+import { createUser } from '../services/user'
 
 const User = () => {
   const handleAccountCreation = async values => {
