@@ -9,8 +9,16 @@ from services.response import json_response
 
 @app.route("/api/posts", methods=["GET"])
 def get_posts():
-    """Return all posts as JSON"""
-    posts = query_db("SELECT * FROM Posts;")
+    """Return all posts or posts by thread id or user id as JSON"""
+    thread_id = request.args.get("thread_id")
+    user_id = request.args.get("user_id")
+
+    if thread_id:
+        posts = query_db("SELECT * FROM Posts WHERE thread_id=%s;", ( thread_id, ))
+    elif user_id:
+        posts = query_db("SELECT * FROM Posts WHERE user_id=%s;", ( user_id, ))
+    else:
+        posts = query_db("SELECT * FROM Posts;")
 
     return json_response(posts)
 
