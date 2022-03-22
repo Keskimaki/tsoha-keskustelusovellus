@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-const url = 'http://localhost:5000/api/boards'
+import { BASE_URI } from '../config'
 
 export const getBoards = async () => {
-  const res = await axios.get(url)
+  const res = await axios.get(`${BASE_URI}/boards`)
   return res.data
 }
