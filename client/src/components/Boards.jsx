@@ -1,11 +1,16 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-const Boards = ({ boards }) => (
-  <div>
-    {boards.map(board => 
-      <p key={board.name}>{board.name} {board.description}</p>
-    )}
-  </div>
-)
+const Boards = ({ boards }) => {
+  return (
+    <div>
+      {boards.map(board => 
+        <Link to={`/${board.name}`} key={board.name}>
+          <p>{board.name} {board.description}</p>
+        </Link>
+      )}
+    </div>
+  )
+}
 
 export default Boards

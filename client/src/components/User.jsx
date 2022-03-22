@@ -27,7 +27,7 @@ const User = () => {
           <Form>
             <Field name="username" type="text" />
             <Field name="password" type="password" />
-            <Field name="repeat_password" type="password" />
+            <Field name="repeatPassword" type="password" />
             <button type="submit">Create Account</button>
           </Form>
       </Formik>
