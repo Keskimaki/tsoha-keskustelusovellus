@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Routes, Route } from "react-router-dom"
 
-import Boards from './components/Boards'
 import { getBoards } from './services/boards'
+
+import Boards from './components/Boards'
+import Login from './components/Login'
 
 const App = () => {
   const [boards, setBoards] = useState([])
@@ -16,6 +18,7 @@ const App = () => {
     <div>
       <Routes>
         <Route path="" element={<Boards boards={boards} />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </div>
   )
