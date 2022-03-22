@@ -32,6 +32,16 @@ def get_thread(thread_id):
 
     return json_response(thread)
 
+@app.route("/api/threads/<string:thread_name>", methods=["GET"])
+def get_thread_id(thread_name):
+    """Return thread id from thread name"""
+    thread_id = query_db("SELECT id FROM Threads WHERE name=%s", ( thread_name, ), True)
+
+    if not thread_id:
+        return { "msg": "Thread not found" }, 404
+
+    return json_response(thread_id)
+
 @app.route("/api/threads", methods=["POST"])
 @jwt_required()
 def create_thread():

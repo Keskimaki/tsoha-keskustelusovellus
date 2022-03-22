@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import { BASE_URI } from '../config'
 
-export const getThreads = async (boardName) => {
+export const getThreads = async boardName => {
   const boardId = await getBoardId(boardName)
 
   const res = await axios.get(`${BASE_URI}/threads?board_id=${boardId}`)
