@@ -9,8 +9,16 @@ from services.response import json_response
 
 @app.route("/api/threads", methods=["GET"])
 def get_threads():
-    """Return all threads as JSON"""
-    threads = query_db("SELECT * FROM Threads;")
+    """Return all threads or threads by board id or user id as JSON"""
+    board_id = request.args.get("board_id")
+    user_id = request.args.get("user_id")
+
+    if board_id:
+        threads = query_db("SELECT * FROM Threads WHERE board_id=%s;", ( board_id, ))
+    elif user_id:
+        threads = query_db("SELECT * FROM Threads WHERE user_id=%s;", ( user_id, ))
+    else:
+        threads = query_db("SELECT * FROM Threads;")
 
     return json_response(threads)
 
