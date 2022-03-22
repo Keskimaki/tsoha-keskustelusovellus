@@ -1,12 +1,14 @@
 """Initialize and start the application"""
 
 from flask import Flask
+from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from flask_bcrypt import Bcrypt
 
 from config import JWT_SECRET_KEY
 
 app = Flask(__name__)
+CORS(app)
 
 app.config["JWT_SECRET_KEY"] = JWT_SECRET_KEY
 jwt = JWTManager(app)
