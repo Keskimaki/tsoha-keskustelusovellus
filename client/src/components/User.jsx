@@ -1,9 +1,12 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Formik, Field, Form } from 'formik'
 
 import { createUser } from '../services/user'
 
 const User = () => {
+  const navigate = useNavigate()
+
   const handleAccountCreation = async values => {
     const { username, password, repeatPassword } = values
 
@@ -15,7 +18,8 @@ const User = () => {
 
     const data = await createUser(username, password)
 
-    return data.access_token
+    window.localStorage.setItem('tsohaUser', JSON.stringify(data))
+    navigate('/')
   }
 
   return (

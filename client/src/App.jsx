@@ -13,7 +13,7 @@ const App = () => {
     const userData = window.localStorage.getItem('tsohaUser')
 
     if (userData) {
-      setUser(userData)
+      setUser(JSON.parse(userData))
     }
 
     console.log(user)

@@ -1,14 +1,18 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Formik, Field, Form } from 'formik'
 
 import { loginUser } from '../services/login'
 
 const Login = () => {
+  const navigate = useNavigate()
+
   const handleLogin = async values => {
     const { username, password } = values
     const data = await loginUser(username, password)
 
     window.localStorage.setItem('tsohaUser', JSON.stringify(data))
+    navigate('/')
   }
 
   return (
