@@ -22,7 +22,7 @@ const Login = () => {
         <Form>
           <Field name="username" type="text" />
           <Field name="password" type="password" />
-          <button type="submit">Submit</button>
+          <button type="submit">Login</button>
         </Form>
       </Formik>
     </div>
