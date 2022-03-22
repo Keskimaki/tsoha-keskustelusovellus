@@ -1,19 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Formik, Field, Form } from 'formik'
 
 import { loginUser } from '../services/login'
 
 const Login = () => {
-  const [token, setToken] = useState('')
-
   const handleLogin = async values => {
     const { username, password } = values
     const data = await loginUser(username, password)
 
-    setToken(data.access_token)
+    window.localStorage.setItem('tsohaUser', JSON.stringify(data))
   }
-
-  console.log(token)
 
   return (
     <div>
