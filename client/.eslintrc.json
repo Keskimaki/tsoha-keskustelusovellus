@@ -18,7 +18,8 @@
         "react"
     ],
     "rules": {
-        "brace-style": "off"
+        "brace-style": "off",
+        "react/prop-types": "off"
     },
     "settings": {
         "react": {
