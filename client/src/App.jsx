@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 
+import { AppWrapper } from './assets/styles'
 import Header from './components/Header'
 import Boards from './components/Boards'
 import Threads from './components/Threads'
@@ -23,7 +24,7 @@ const App = () => {
   }, [])
 
   return (
-    <div>
+    <AppWrapper>
       <Header />
       <Routes>
         <Route path="/" element={<Boards />} />
@@ -33,7 +34,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
       </Routes>
       <Footer />
-    </div>
+    </AppWrapper>
   )
 }
 

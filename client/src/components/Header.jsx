@@ -1,12 +1,13 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+
+import { HeaderWrapper, HeaderLink } from '../assets/styles'
 
 const Header = () => (
-    <header>
-        <Link to="/">Forum</Link>
-        <Link to="/login">Login</Link>
-        <Link to="/create">Create Account</Link>
-    </header>
+    <HeaderWrapper>
+        <HeaderLink to="/">Forum</HeaderLink>
+        <HeaderLink to="/login">Login</HeaderLink>
+        <HeaderLink to="/create">Create Account</HeaderLink>
+    </HeaderWrapper>
 )
 
 export default Header
