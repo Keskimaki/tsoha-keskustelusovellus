@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
+import { Link } from 'react-router-dom'
 
 import { getThreads } from '../services/threads'
 
@@ -13,13 +14,13 @@ const Threads = () => {
     setThreads(data)
   }, [])
 
-  console.log(threads)
-
   return (
     <div>
       <h1>{boardName}</h1>
       {threads.map(thread =>
-        <p key={thread.name}>{thread.name}</p>
+        <Link to={`/${boardName}/${thread.name}`} key={thread.name}>
+          <p key={thread.name}>{thread.name}</p>
+        </Link>
       )}
     </div>
   )
