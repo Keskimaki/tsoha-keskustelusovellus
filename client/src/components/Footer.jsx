@@ -1,9 +1,11 @@
 import React from 'react'
 
+import { FooterWrapper } from '../assets/styles'
+
 const Footer = () => (
-    <footer>
-        <p>Under construction</p>
-    </footer>
+    <FooterWrapper>
+        Under construction
+    </FooterWrapper>
 )
 
 export default Footer
