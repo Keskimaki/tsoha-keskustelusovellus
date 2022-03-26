@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Formik, Field, Form } from 'formik'
 
 import { loginUser } from '../services/login'
+import { Button } from '../assets/styles'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -24,7 +25,7 @@ const Login = () => {
         <Form>
           <Field name="username" type="text" />
           <Field name="password" type="password" />
-          <button type="submit">Login</button>
+          <Button primary type="submit">Login</Button>
         </Form>
       </Formik>
     </div>
