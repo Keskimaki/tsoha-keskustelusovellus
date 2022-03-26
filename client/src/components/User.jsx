@@ -1,9 +1,9 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Formik, Field, Form } from 'formik'
+import { Formik, Form } from 'formik'
 
 import { createUser } from '../services/user'
-import { Button } from '../assets/styles'
+import { Title, Button, TextField } from '../assets/styles'
 
 const User = () => {
   const navigate = useNavigate()
@@ -25,14 +25,14 @@ const User = () => {
 
   return (
     <div>
-      <h1>Create Account</h1>
+      <Title>Create Account</Title>
       <Formik
         initialValues={{ username: '', password: '', repeatPassword: '' }}
         onSubmit={handleAccountCreation}>
           <Form>
-            <Field name="username" type="text" />
-            <Field name="password" type="password" />
-            <Field name="repeatPassword" type="password" />
+            <TextField name="username" type="text" /> <br />
+            <TextField name="password" type="password" /> <br />
+            <TextField name="repeatPassword" type="password" /> <br />
             <Button type="submit">Create Account</Button>
           </Form>
       </Formik>

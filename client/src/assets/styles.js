@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { Field } from 'formik'
 
 export const AppWrapper = styled.div`
   display: flex;
@@ -24,14 +25,26 @@ export const HeaderLink = styled(Link)`
   font-weight: bold;
 `
 
+export const Title = styled.h1`
+  color: #24292e;
+  margin: 0.5em;
+`
+
 export const Button = styled.button`
   background: dodgerblue;
   color: white;
   font-size: 1em;
-  margin: 1em;
+  margin: 0.5em;
   padding: 0.25em 1em;
   border: 2px solid dodgerblue;
   border-radius: 3px;
+`
+
+export const TextField = styled(Field)`
+  border: 0.2em solid #24292e;
+  border-radius: 0.3em;
+  padding: 0.5em;
+  margin: 0.5em;
 `
 
 export const FooterWrapper = styled.footer`
