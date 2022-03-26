@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
 
 import { getPosts } from '../services/posts'
+import { Title, Placeholder } from '../assets/styles'
 
 const Posts = () => {
   const [posts, setPosts] = useState([])
@@ -15,10 +16,10 @@ const Posts = () => {
 
   return (
     <div>
-      <h1>{boardName}</h1>
-      <p>{threadName}</p>
+      <Title>{boardName}</Title>
+      <Title>{threadName}</Title>
       {posts.map(post =>
-        <p key={post.id}>{post.content}</p>
+        <Placeholder key={post.id}>{post.content}</Placeholder>
       )}
     </div>
   )

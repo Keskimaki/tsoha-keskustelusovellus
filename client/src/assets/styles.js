@@ -1,11 +1,12 @@
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 import { Field } from 'formik'
 
 export const AppWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  
+
+  background-color: #fafafa;
   height: 100vh;
   margin: 0;
 `
@@ -18,11 +19,23 @@ export const HeaderWrapper = styled.header`
   padding: 1em;
 `
 
-export const HeaderLink = styled(Link)`
+export const HeaderLink = styled(RouterLink)`
   text-decoration: none;
   color: white;
   font-size: 1.5em;
   font-weight: bold;
+`
+
+export const Placeholder = styled.div`
+  background-color: white;
+  border: 0.2em solid #24292e;
+  margin: 1em;
+  padding: 1em;
+`
+
+export const Link = styled(RouterLink)`
+  text-decoration: none;
+  color: #24292e;
 `
 
 export const Title = styled.h1`

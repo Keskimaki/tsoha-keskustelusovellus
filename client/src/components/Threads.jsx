@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
-import { Link } from 'react-router-dom'
 
 import { getThreads } from '../services/threads'
+import { Title, Link, Placeholder } from '../assets/styles'
 
 const Threads = () => {
   const [threads, setThreads] = useState([])
@@ -16,10 +16,10 @@ const Threads = () => {
 
   return (
     <div>
-      <h1>{boardName}</h1>
+      <Title>{boardName}</Title>
       {threads.map(thread =>
         <Link to={`/${boardName}/${thread.name}`} key={thread.name}>
-          <p key={thread.name}>{thread.name}</p>
+          <Placeholder key={thread.name}>{thread.name}</Placeholder>
         </Link>
       )}
     </div>
