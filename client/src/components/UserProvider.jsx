@@ -11,7 +11,7 @@ const UserProvider = props => {
     if (userData) {
       setUser(JSON.parse(userData))
     }
-  }, [user])
+  }, [])
 
   return (
     <UserContext.Provider value={[user, setUser]}>
