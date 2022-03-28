@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
 
 import { getThreads } from '../../services/threads'
-import { Title, Link, Placeholder } from '../../assets/styles'
+import { Title, Link } from '../../assets/styles'
+import Thread from './Thread'
 import MakeThread from './MakeThread'
 
 const Threads = () => {
@@ -20,7 +21,7 @@ const Threads = () => {
       <Title>{boardName}</Title>
       {threads.map(thread =>
         <Link to={`/${boardName}/${thread.name}`} key={thread.name}>
-          <Placeholder key={thread.name}>{thread.name}</Placeholder>
+          <Thread key={thread.name} thread={thread} />
         </Link>
       )}
       <MakeThread setThreads={setThreads} />

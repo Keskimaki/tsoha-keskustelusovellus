@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
 
-import { Title, Placeholder } from '../../assets/styles'
+import { Title } from '../../assets/styles'
 import { getPosts } from '../../services/posts'
+import Post from './Post'
 import MakePost from './MakePost'
 
 const Posts = () => {
@@ -20,7 +21,7 @@ const Posts = () => {
       <Title>{boardName}</Title>
       <Title>{threadName}</Title>
       {posts.map(post =>
-        <Placeholder key={post.id}>{post.content}</Placeholder>
+        <Post key={post.id} post={post} />
       )}
       <MakePost setPosts={setPosts} />
     </div>
