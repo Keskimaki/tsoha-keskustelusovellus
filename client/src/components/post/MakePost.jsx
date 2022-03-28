@@ -10,8 +10,7 @@ const MakePost = ({ setPosts }) => {
   const [user] = useContext(UserContext)
   const { threadName } = useParams()
 
-  const handlePost = async values => {
-    const { content } = values
+  const handlePostCreation = async ({ content }) => {
     await makePost(user.token, user.id, threadName, content)
 
     const data = await getPosts(threadName)
@@ -23,7 +22,7 @@ const MakePost = ({ setPosts }) => {
       <Title>Make Post</Title>
       <Formik
         initialValues={{ content: '' }}
-        onSubmit={handlePost}>
+        onSubmit={handlePostCreation}>
         <Form>
           <TextField name="content" type="text" /> <br />
           <Button primary type="submit">Post</Button>

@@ -11,8 +11,7 @@ const Login = () => {
   const context = useContext(UserContext)
   const navigate = useNavigate()
 
-  const handleLogin = async values => {
-    const { username, password } = values
+  const handleLogin = async ({ username, password }) => {
     const data = await loginUser(username, password)
 
     updateUser(context, data)

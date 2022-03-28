@@ -10,9 +10,7 @@ const User = () => {
   const context = useContext(UserContext)
   const navigate = useNavigate()
 
-  const handleAccountCreation = async values => {
-    const { username, password, repeatPassword } = values
-
+  const handleAccountCreation = async ({ username, password, repeatPassword }) => {
     // TODO username length and password quality checks, maybe move to backend?
     if (password !== repeatPassword) {
       console.log('Password and and repeat must match')
