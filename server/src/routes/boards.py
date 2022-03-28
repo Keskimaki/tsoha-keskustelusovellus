@@ -43,7 +43,7 @@ def create_board():
         return { "msg": "Administrator privileges required" }, 401
 
     body = request.json
-    # TODO Move to parsing
+
     if not "private" in body:
         body["private"] = False
 
@@ -53,3 +53,24 @@ def create_board():
     )
 
     return { "msg": f"Board {body['name']} created" }, 201
+
+@app.route("/api/boards/<int:board_id>", methods=["PUT"])
+@jwt_required()
+def edit_board(board_id):
+    """Allow admins to edit boards"""
+    if not check_admin():
+        return { "msg": "Administrator privileges required" }, 401
+
+    board = query_db("SELECT * FROM Boards WHERE id=%s;", ( str(board_id), ), True)
+
+    if not board:
+        return { "msg": "Board not found" }, 404
+    
+    body = request.json
+
+    insert_into_db(
+        "UPDATE Boards SET name=%s, description=%s, private=%s WHERE id=%s;",
+        ( body["name"], body["description"], body["private"], board_id )
+    )
+
+    return { "msg": f"Board {body['name']} edited" }, 204

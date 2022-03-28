@@ -7,6 +7,7 @@ DROP_TABLES = """
     DROP TABLE IF EXISTS Users;
 """
 
+# TODO time needs to store date as well
 CREATE_USER_TABLE = """
     CREATE TABLE Users (
         id SERIAL PRIMARY KEY,
