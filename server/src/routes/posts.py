@@ -50,17 +50,7 @@ def create_post():
 @jwt_required()
 def edit_post(post_id):
     """User can edit own post and admin can edit any post"""
-    post_id = str(post_id)
-    is_admin = check_admin()
-
-    if is_admin:
-        post = query_db("SELECT * FROM Posts WHERE id=%s;", ( post_id, ), True)
-    else:
-        identity = get_jwt_identity()
-        post = query_db(
-            "SELECT * FROM Posts WHERE id=%s AND user_id=(SELECT id FROM Users WHERE username=%s);",
-            ( post_id, identity ), True
-        )
+    post = check_and_get_post(post_id)
 
     if not post:
         return { "msg": "Post not found" }, 404
@@ -76,10 +66,20 @@ def edit_post(post_id):
 @jwt_required()
 def delete_post(post_id):
     """User can delete own post and admin can delete any post"""
-    post_id = str(post_id)
-    is_admin = check_admin()
+    post = check_and_get_post(post_id)
 
-    if is_admin:
+    if not post:
+        return { "msg": "Post not found" }, 404
+
+    insert_into_db("DELETE FROM Posts WHERE id=%s;", ( post_id, ))
+
+    return { "msg": f"Post {post_id} deleted" }, 204
+
+def check_and_get_post(post_id):
+    """Query database for post with given id if user is admin or post owner"""
+    post_id = str(post_id)
+
+    if check_admin():
         post = query_db("SELECT * FROM Posts WHERE id=%s;", ( post_id, ), True)
     else:
         identity = get_jwt_identity()
@@ -88,9 +88,4 @@ def delete_post(post_id):
             ( post_id, identity ), True
         )
 
-    if not post:
-        return { "msg": "Post not found" }, 404
-
-    insert_into_db("DELETE FROM Posts WHERE id=%s;", ( post_id, ))
-
-    return { "msg": f"Post {post_id} deleted" }, 204
+    return post
