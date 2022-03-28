@@ -3,16 +3,19 @@ import { useParams } from 'react-router-dom'
 import { Formik, Form } from 'formik'
 
 import { Title, TextField, Button } from '../../assets/styles'
-import { makePost } from '../../services/posts'
+import { getPosts, makePost } from '../../services/posts'
 import { UserContext } from '../UserProvider'
 
-const MakePost = () => {
+const MakePost = ({ setPosts }) => {
   const [user] = useContext(UserContext)
   const { threadName } = useParams()
 
   const handlePost = async values => {
     const { content } = values
     await makePost(user.token, user.id, threadName, content)
+
+    const data = await getPosts(threadName)
+    setPosts(data)
   }
 
   return (

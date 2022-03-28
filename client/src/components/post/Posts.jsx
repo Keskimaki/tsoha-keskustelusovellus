@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
 
-import { getPosts } from '../../services/posts'
 import { Title, Placeholder } from '../../assets/styles'
+import { getPosts } from '../../services/posts'
 import MakePost from './MakePost'
 
 const Posts = () => {
@@ -22,7 +22,7 @@ const Posts = () => {
       {posts.map(post =>
         <Placeholder key={post.id}>{post.content}</Placeholder>
       )}
-      <MakePost />
+      <MakePost setPosts={setPosts} />
     </div>
   )
 }
