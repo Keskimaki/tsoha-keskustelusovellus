@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
 
-import { getThreads } from '../services/threads'
-import { Title, Link, Placeholder } from '../assets/styles'
+import { getThreads } from '../../services/threads'
+import { Title, Link, Placeholder } from '../../assets/styles'
+import MakeThread from './MakeThread'
 
 const Threads = () => {
   const [threads, setThreads] = useState([])
@@ -22,6 +23,7 @@ const Threads = () => {
           <Placeholder key={thread.name}>{thread.name}</Placeholder>
         </Link>
       )}
+      <MakeThread setThreads={setThreads} />
     </div>
   )
 }
