@@ -75,6 +75,19 @@ def edit_thread(thread_id):
 
     return { "msg": f"Thread {body['name']} edited" }, 204
 
+@app.route("/api/threads/<int:thread_id>", methods=["DELETE"])
+@jwt_required()
+def delete_thread(thread_id):
+    """User can delete own thread and admin can delete any thread"""
+    thread = check_and_get_thread(thread_id)
+
+    if not thread:
+        return { "msg": "Thread not found" }, 404
+
+    insert_into_db("DELETE FROM Threads WHERE id=%s;", ( thread_id, ))
+
+    return { "msg": f"Thread {thread['name']} deleted" }, 204
+
 def check_and_get_thread(thread_id):
     """Query database for thread with given id if user is admin or thread owner"""
     thread_id = str(thread_id)
@@ -84,8 +97,9 @@ def check_and_get_thread(thread_id):
     else:
         identity = get_jwt_identity()
         thread = query_db(
-            "SELECT * FROM Threads WHERE id=%s AND user_id=(SELECT id FROM Users WHERE username=%s);",
+            """SELECT * FROM Threads WHERE id=%s AND user_id=
+                (SELECT id FROM Users WHERE username=%s);""",
             ( thread_id, identity ), True
         )
-    
+
     return thread

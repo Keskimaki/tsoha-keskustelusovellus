@@ -73,7 +73,7 @@ def delete_post(post_id):
 
     insert_into_db("DELETE FROM Posts WHERE id=%s;", ( post_id, ))
 
-    return { "msg": f"Post {post_id} deleted" }, 204
+    return { "msg": f"Post {post['content']} deleted" }, 204
 
 def check_and_get_post(post_id):
     """Query database for post with given id if user is admin or post owner"""
