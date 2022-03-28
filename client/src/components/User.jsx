@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Formik, Form } from 'formik'
 
 import { createUser, updateUser } from '../services/user'
 import { Title, Button, TextField } from '../assets/styles'
+import { UserContext } from './UserProvider'
 
 const User = () => {
+  const context = useContext(UserContext)
   const navigate = useNavigate()
 
   const handleAccountCreation = async values => {
@@ -19,7 +21,7 @@ const User = () => {
 
     const data = await createUser(username, password)
 
-    updateUser(data)
+    updateUser(context, data)
     navigate('/')
   }
 
