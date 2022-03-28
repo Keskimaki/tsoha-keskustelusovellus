@@ -71,3 +71,26 @@ def edit_post(post_id):
         insert_into_db("UPDATE Posts SET content=%s WHERE id=%s;", ( body["content"], post_id ))
 
     return { "msg": f"Post '{body['content']}' edited" }, 204
+
+@app.route("/api/posts/<int:post_id>", methods=["DELETE"])
+@jwt_required()
+def delete_post(post_id):
+    """User can delete own post and admin can delete any post"""
+    post_id = str(post_id)
+    is_admin = check_admin()
+
+    if is_admin:
+        post = query_db("SELECT * FROM Posts WHERE id=%s;", ( post_id, ), True)
+    else:
+        identity = get_jwt_identity()
+        post = query_db(
+            "SELECT * FROM Posts WHERE id=%s AND user_id=(SELECT id FROM Users WHERE username=%s);",
+            ( post_id, identity ), True
+        )
+
+    if not post:
+        return { "msg": "Post not found" }, 404
+
+    insert_into_db("DELETE FROM Posts WHERE id=%s;", ( post_id, ))
+
+    return { "msg": f"Post {post_id} deleted" }, 204
