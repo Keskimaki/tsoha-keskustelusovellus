@@ -59,7 +59,7 @@ def create_thread():
 @app.route("/api/threads/<int:thread_id>", methods=["PUT"])
 @jwt_required()
 def edit_thread(thread_id):
-    """User can edit own thread or admin can edit any thread"""
+    """User can edit own thread and admin can edit any thread"""
     thread_id = str(thread_id)
     is_admin = check_admin()
 
@@ -69,7 +69,7 @@ def edit_thread(thread_id):
         identity = get_jwt_identity()
         thread = query_db(
             "SELECT * FROM Threads WHERE id=%s AND user_id=(SELECT id FROM Users WHERE username=%s);",
-            ( str(thread_id), identity ), True
+            ( thread_id, identity ), True
         )
 
     if not thread:

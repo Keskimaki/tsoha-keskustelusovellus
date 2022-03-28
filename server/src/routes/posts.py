@@ -1,10 +1,11 @@
 """Router for post related api requests"""
 
 from flask import request
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from app import app
 from services.db import query_db, insert_into_db
+from services.user import check_admin
 from services.response import json_response
 
 @app.route("/api/posts", methods=["GET"])
@@ -44,3 +45,29 @@ def create_post():
     )
 
     return { "msg": f"Post '{body['content']}' created" }, 201
+
+@app.route("/api/posts/<int:post_id>", methods=["PUT"])
+@jwt_required()
+def edit_post(post_id):
+    """User can edit own post and admin can edit any post"""
+    post_id = str(post_id)
+    is_admin = check_admin()
+
+    if is_admin:
+        post = query_db("SELECT * FROM Posts WHERE id=%s;", ( post_id, ), True)
+    else:
+        identity = get_jwt_identity()
+        post = query_db(
+            "SELECT * FROM Posts WHERE id=%s AND user_id=(SELECT id FROM Users WHERE username=%s);",
+            ( post_id, identity ), True
+        )
+
+    if not post:
+        return { "msg": "Post not found" }, 404
+
+    body = request.json
+    # TODO add timestamp from edit to post, needs to be added to db schema
+    if "content" in body:
+        insert_into_db("UPDATE Posts SET content=%s WHERE id=%s;", ( body["content"], post_id ))
+
+    return { "msg": f"Post '{body['content']}' edited" }, 204
