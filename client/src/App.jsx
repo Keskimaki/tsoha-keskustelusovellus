@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 
 import { AppWrapper } from './assets/styles'
@@ -10,32 +10,22 @@ import User from './components/User'
 import Login from './components/Login'
 import Footer from './components/Footer'
 
-const App = () => {
-  const [user, setUser] = useState(null)
+import UserProvider from './components/UserProvider'
 
-  useEffect(() => {
-    const userData = window.localStorage.getItem('tsohaUser')
-
-    if (userData) {
-      setUser(JSON.parse(userData))
-    }
-
-    console.log(user)
-  }, [])
-
-  return (
+const App = () => (
     <AppWrapper>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Boards />} />
-        <Route path="/:boardName" element={<Threads />} />
-        <Route path="/:boardName/:threadName" element={<Posts />} />
-        <Route path="/create" element={<User />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
-      <Footer />
+      <UserProvider>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Boards />} />
+          <Route path="/:boardName" element={<Threads />} />
+          <Route path="/:boardName/:threadName" element={<Posts />} />
+          <Route path="/create" element={<User />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+        <Footer />
+      </UserProvider>
     </AppWrapper>
-  )
-}
+)
 
 export default App
