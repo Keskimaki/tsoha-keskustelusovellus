@@ -65,7 +65,7 @@ def edit_board(board_id):
 
     if not board:
         return { "msg": "Board not found" }, 404
-    
+
     body = request.json
 
     insert_into_db(
@@ -74,3 +74,19 @@ def edit_board(board_id):
     )
 
     return { "msg": f"Board {body['name']} edited" }, 204
+
+@app.route("/api/boards/<int:board_id>", methods=["DELETE"])
+@jwt_required()
+def delete_board(board_id):
+    """Allow admins to delete boards"""
+    if not check_admin():
+        return { "msg": "Administrator privileges required" }, 401
+
+    board = query_db("SELECT * FROM Boards WHERE id=%s;", ( str(board_id), ), True)
+
+    if not board:
+        return { "msg": "Board not found" }, 404
+
+    insert_into_db("DELETE FROM Boards WHERE id=%s;", ( board_id, ))
+
+    return { "msg": f"Board {board['name']} deleted" }, 204
