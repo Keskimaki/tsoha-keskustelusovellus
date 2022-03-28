@@ -4,7 +4,7 @@ import { Formik, Form } from 'formik'
 
 import { loginUser } from '../services/login'
 import { updateUser } from '../services/user'
-import { Title, Button, TextField } from '../assets/styles'
+import { Title, TextField, Button } from '../assets/styles'
 import { UserContext } from './UserProvider'
 
 const Login = () => {

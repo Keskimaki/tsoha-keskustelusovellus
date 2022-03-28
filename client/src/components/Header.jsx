@@ -15,7 +15,7 @@ const Header = () => {
           <HeaderLink to="/" onClick={() => logoutUser(setUser)}>
             Logout
           </HeaderLink>
-          <HeaderLink to="/user">User</HeaderLink>
+          <HeaderLink to="/user">{user.username}</HeaderLink>
         </>
         : <>
           <HeaderLink to="/login">Login</HeaderLink>

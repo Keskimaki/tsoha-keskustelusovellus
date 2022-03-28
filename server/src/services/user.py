@@ -7,7 +7,7 @@ from services.db import query_db
 def generate_user_session(token, username):
     """Generate user session for frontend"""
     res = query_db("SELECT id FROM Users WHERE username=%s;", ( username, ), True)
-    token = "bearer " + token
+    token = "Bearer " + token
 
     return { "token": token, "username": username, "id": res["id"], "admin": check_admin(username) }
 

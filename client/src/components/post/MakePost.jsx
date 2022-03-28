@@ -12,9 +12,7 @@ const MakePost = () => {
 
   const handlePost = async values => {
     const { content } = values
-    console.log(user)
-    const data = await makePost(user.token, user.id, threadName, content)
-    console.log(data)
+    await makePost(user.token, user.id, threadName, content)
   }
 
   return (
