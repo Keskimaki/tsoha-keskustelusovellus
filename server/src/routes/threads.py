@@ -1,10 +1,11 @@
 """Router for thread related api requests"""
 
 from flask import request
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from app import app
 from services.db import query_db, insert_into_db
+from services.user import check_admin
 from services.response import json_response
 
 @app.route("/api/threads", methods=["GET"])
@@ -54,3 +55,32 @@ def create_thread():
     )
 
     return { "msg": f"Thread {body['name']} created" }, 201
+
+@app.route("/api/threads/<int:thread_id>", methods=["PUT"])
+@jwt_required()
+def edit_thread(thread_id):
+    """User can edit own thread or admin can edit any thread"""
+    thread_id = str(thread_id)
+    is_admin = check_admin()
+
+    if is_admin:
+        thread = query_db("SELECT * FROM Threads WHERE id=%s;", ( thread_id, ), True)
+    else:
+        identity = get_jwt_identity()
+        thread = query_db(
+            "SELECT * FROM Threads WHERE id=%s AND user_id=(SELECT id FROM Users WHERE username=%s);",
+            ( str(thread_id), identity ), True
+        )
+
+    if not thread:
+        return { "msg": "Thread not found" }, 404
+
+    body = request.json
+
+    if "name" in body:
+        insert_into_db("UPDATE Threads SET name=%s WHERE id=%s;", ( body["name"], thread_id ))
+
+    if is_admin and "closed" in body:
+        insert_into_db("UPDATE Threads SET closed=%s WHERE id=%s;", ( body["closed"], thread_id ))
+
+    return { "msg": f"Thread {body['name']} edited" }, 204
