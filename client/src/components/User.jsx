@@ -1,16 +1,12 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Formik, Form } from 'formik'
 
-import { createUser } from '../services/user'
+import { createUser, updateUser } from '../services/user'
 import { Title, Button, TextField } from '../assets/styles'
-import { UserContext } from './UserProvider'
 
 const User = () => {
-  const [user, setUser] = useContext(UserContext)
   const navigate = useNavigate()
-
-  if (user) return null
 
   const handleAccountCreation = async values => {
     const { username, password, repeatPassword } = values
@@ -23,9 +19,7 @@ const User = () => {
 
     const data = await createUser(username, password)
 
-    setUser(data)
-    window.localStorage.setItem('tsohaUser', JSON.stringify(data))
-
+    updateUser(data)
     navigate('/')
   }
 
