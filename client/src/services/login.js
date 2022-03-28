@@ -1,6 +1,11 @@
+import { useContext } from 'react'
 import axios from 'axios'
 
 import { BASE_URI } from '../config'
+import { UserContext } from '../components/UserProvider'
+
+// eslint-disable-next-line no-unused-vars
+const [user, setUser] = useContext(UserContext)
 
 export const loginUser = async (username, password) => {
   const data = { username, password }
@@ -12,4 +17,9 @@ export const loginUser = async (username, password) => {
   catch (err) {
     console.log(err)
   }
+}
+
+export const logoutUser = () => {
+  window.localStorage.removeItem('tsohaUser')
+  setUser(undefined)
 }

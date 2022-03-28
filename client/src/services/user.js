@@ -4,7 +4,7 @@ import axios from 'axios'
 import { BASE_URI } from '../config'
 import { UserContext } from '../components/UserProvider'
 
-// eslint-disable-next-line
+// eslint-disable-next-line no-unused-vars
 const [user, setUser] = useContext(UserContext)
 
 export const createUser = async (username, password) => {
