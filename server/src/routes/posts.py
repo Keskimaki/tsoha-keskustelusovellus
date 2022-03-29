@@ -60,7 +60,7 @@ def edit_post(post_id):
     if "content" in body:
         insert_into_db("UPDATE Posts SET content=%s WHERE id=%s;", ( body["content"], post_id ))
 
-    return { "msg": f"Post '{body['content']}' edited" }, 204
+    return { "msg": f"Post '{body['content']}' edited" }
 
 @app.route("/api/posts/<int:post_id>", methods=["DELETE"])
 @jwt_required()
@@ -73,7 +73,7 @@ def delete_post(post_id):
 
     insert_into_db("DELETE FROM Posts WHERE id=%s;", ( post_id, ))
 
-    return { "msg": f"Post {post['content']} deleted" }, 204
+    return { "msg": f"Post {post['content']} deleted" }
 
 def check_and_get_post(post_id):
     """Query database for post with given id if user is admin or post owner"""

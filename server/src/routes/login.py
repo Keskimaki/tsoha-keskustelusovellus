@@ -1,7 +1,7 @@
 """Login router"""
 
 from flask import request
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, jwt_required
 
 from services.db import query_db
 from services.user import generate_user_session
@@ -25,3 +25,9 @@ def login_user():
     jwt = create_access_token(body["username"])
 
     return generate_user_session(jwt, body["username"])
+
+@app.route("/api/login", methods=["GET"])
+@jwt_required()
+def get_login_status():
+    """Check if user token is active"""
+    return { "msg": "Logged in" }

@@ -73,7 +73,7 @@ def edit_thread(thread_id):
     if check_admin() and "closed" in body:
         insert_into_db("UPDATE Threads SET closed=%s WHERE id=%s;", ( body["closed"], thread_id ))
 
-    return { "msg": f"Thread {body['name']} edited" }, 204
+    return { "msg": f"Thread {body['name']} edited" }
 
 @app.route("/api/threads/<int:thread_id>", methods=["DELETE"])
 @jwt_required()
@@ -86,7 +86,7 @@ def delete_thread(thread_id):
 
     insert_into_db("DELETE FROM Threads WHERE id=%s;", ( thread_id, ))
 
-    return { "msg": f"Thread {thread['name']} deleted" }, 204
+    return { "msg": f"Thread {thread['name']} deleted" }
 
 def check_and_get_thread(thread_id):
     """Query database for thread with given id if user is admin or thread owner"""

@@ -73,7 +73,7 @@ def edit_board(board_id):
         ( body["name"], body["description"], body["private"], board_id )
     )
 
-    return { "msg": f"Board {body['name']} edited" }, 204
+    return { "msg": f"Board {body['name']} edited" }
 
 @app.route("/api/boards/<int:board_id>", methods=["DELETE"])
 @jwt_required()
@@ -89,4 +89,4 @@ def delete_board(board_id):
 
     insert_into_db("DELETE FROM Boards WHERE id=%s;", ( board_id, ))
 
-    return { "msg": f"Board {board['name']} deleted" }, 204
+    return { "msg": f"Board {board['name']} deleted" }
