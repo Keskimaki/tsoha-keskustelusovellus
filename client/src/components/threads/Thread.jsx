@@ -1,11 +1,11 @@
 import React from 'react'
 
-import { Placeholder } from '../../assets/styles'
+import { Wrapper } from '../../assets/styles'
 
 const Thread = ({ thread }) => {
   return (
     <div>
-      <Placeholder>{thread.name}</Placeholder>
+      <Wrapper>{thread.name}</Wrapper>
     </div>
   )
 }

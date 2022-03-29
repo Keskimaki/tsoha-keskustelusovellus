@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import { getBoards } from '../services/boards'
-import { Link, Placeholder } from '../assets/styles'
+import { Link, Wrapper } from '../assets/styles'
 
 const Boards = () => {
   const [boards, setBoards] = useState([])
@@ -15,7 +15,7 @@ const Boards = () => {
     <div>
       {boards.map(board =>
         <Link to={`/${board.name}`} key={board.name}>
-          <Placeholder>{board.name} {board.description}</Placeholder>
+          <Wrapper>{board.name} {board.description}</Wrapper>
         </Link>
       )}
     </div>

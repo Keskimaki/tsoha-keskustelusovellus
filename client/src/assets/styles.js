@@ -5,8 +5,7 @@ import { Field } from 'formik'
 export const AppWrapper = styled.div`
   display: flex;
   flex-direction: column;
-
-  background-color: #fafafa;
+  background-color: #e1e4e8;
   height: 100vh;
   margin: 0;
 `
@@ -26,10 +25,9 @@ export const HeaderLink = styled(RouterLink)`
   font-weight: bold;
 `
 
-export const Placeholder = styled.div`
+export const Wrapper = styled.div`
   background-color: white;
-  border: 0.2em solid #24292e;
-  margin: 1em;
+  margin: 0.5em 1em;
   padding: 1em;
 `
 

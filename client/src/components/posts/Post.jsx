@@ -1,11 +1,11 @@
 import React from 'react'
 
-import { Placeholder } from '../../assets/styles'
+import { Wrapper } from '../../assets/styles'
 
 const Post = ({ post }) => {
   return (
     <div>
-      <Placeholder>{post.content}</Placeholder>
+      <Wrapper>{post.content}</Wrapper>
     </div>
   )
 }
