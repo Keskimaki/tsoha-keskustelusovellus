@@ -7,6 +7,7 @@ from app import app
 from services.db import query_db, insert_into_db
 from services.user import check_admin
 from services.response import json_response
+from database.queries import GET_POSTS_BY_THREAD_ID
 
 @app.route("/api/posts", methods=["GET"])
 def get_posts():
@@ -15,7 +16,8 @@ def get_posts():
     user_id = request.args.get("user_id")
 
     if thread_id:
-        posts = query_db("SELECT * FROM Posts WHERE thread_id=%s;", ( thread_id, ))
+        posts = query_db(GET_POSTS_BY_THREAD_ID, ( thread_id, ))
+        # posts = query_db("SELECT * FROM Posts WHERE thread_id=%s;", ( thread_id, ))
     elif user_id:
         posts = query_db("SELECT * FROM Posts WHERE user_id=%s;", ( user_id, ))
     else:
