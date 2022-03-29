@@ -19,3 +19,19 @@ export const logoutUser = setUser => {
   window.localStorage.removeItem('tsohaUser')
   setUser(undefined)
 }
+
+export const checkLogin = async () => {
+  let loggedIn = true
+
+  let user = window.localStorage.getItem('tsohaUser')
+  user = JSON.parse(user)
+
+  const auth = { headers: { Authorization: user.token } }
+
+  await axios.get(`${BASE_URI}/login`, auth).catch(err => {
+    console.log(err)
+    loggedIn = false
+  })
+
+  return loggedIn
+}
