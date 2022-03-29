@@ -7,7 +7,7 @@ from app import app
 from services.db import query_db, insert_into_db
 from services.user import check_admin
 from services.response import json_response
-from database.queries import GET_POSTS_BY_THREAD_ID
+from database import queries
 
 @app.route("/api/posts", methods=["GET"])
 def get_posts():
@@ -16,19 +16,18 @@ def get_posts():
     user_id = request.args.get("user_id")
 
     if thread_id:
-        posts = query_db(GET_POSTS_BY_THREAD_ID, ( thread_id, ))
-        # posts = query_db("SELECT * FROM Posts WHERE thread_id=%s;", ( thread_id, ))
+        posts = query_db(queries.GET_POSTS_BY_THREAD_ID, ( thread_id, ))
     elif user_id:
-        posts = query_db("SELECT * FROM Posts WHERE user_id=%s;", ( user_id, ))
+        posts = query_db(queries.GET_POSTS_BY_USER_ID, ( user_id, ))
     else:
-        posts = query_db("SELECT * FROM Posts;")
+        posts = query_db(queries.GET_ALL_POSTS)
 
     return json_response(posts)
 
 @app.route("/api/posts/<int:post_id>", methods=["GET"])
 def get_post(post_id):
     """Return a single post by id"""
-    post = query_db("SELECT * FROM Posts WHERE id=%s;", ( str(post_id), ), True)
+    post = query_db(queries.GET_POST_BY_ID, ( str(post_id), ), True)
 
     if not post:
         return { "msg": "Post not found" }, 404
