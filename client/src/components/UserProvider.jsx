@@ -1,16 +1,29 @@
 import React, { useState, useEffect, createContext } from 'react'
 
+import { checkLogin } from '../services/login'
+
 export const UserContext = createContext()
 
 const UserProvider = props => {
   const [user, setUser] = useState(undefined)
 
-  useEffect(() => {
+  const updateLoginStatus = async () => {
     const userData = window.localStorage.getItem('tsohaUser')
+    if (!userData) {
+      return
+    }
 
-    if (userData) {
+    const loggedIn = await checkLogin()
+    if (loggedIn) {
       setUser(JSON.parse(userData))
     }
+    else {
+      window.localStorage.removeItem('tsohaUser')
+    }
+  }
+
+  useEffect(async () => {
+    await updateLoginStatus()
   }, [])
 
   return (
