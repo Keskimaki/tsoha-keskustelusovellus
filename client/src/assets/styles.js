@@ -27,6 +27,7 @@ export const HeaderLink = styled(RouterLink)`
 
 export const Wrapper = styled.div`
   background-color: white;
+  font-size: 1.25em;
   margin: 0.5em 1em;
   padding: 1em;
 `

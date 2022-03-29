@@ -4,7 +4,9 @@ import { Wrapper } from '../../assets/styles'
 
 const Board = ({ board }) => (
   <Wrapper>
-    {board.name} {board.description}
+    <strong>{board.name}</strong>
+    <br />
+    {board.description}
   </Wrapper>
 )
 

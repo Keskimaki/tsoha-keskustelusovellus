@@ -10,11 +10,13 @@ const MakeThread = ({ setThreads }) => {
   const [user] = useContext(UserContext)
   const { boardName } = useParams()
 
-  const handleThreadCreation = async ({ name, content }) => {
+  const handleThreadCreation = async ({ name, content }, { resetForm }) => {
     await makeThread(user.token, user.id, boardName, name, content)
 
     const data = await getThreads(boardName)
     setThreads(data)
+
+    resetForm()
   }
 
   return (

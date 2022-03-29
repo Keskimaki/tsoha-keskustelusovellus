@@ -10,11 +10,13 @@ const MakePost = ({ setPosts }) => {
   const [user] = useContext(UserContext)
   const { threadName } = useParams()
 
-  const handlePostCreation = async ({ content }) => {
+  const handlePostCreation = async ({ content }, { resetForm }) => {
     await makePost(user.token, user.id, threadName, content)
 
     const data = await getPosts(threadName)
     setPosts(data)
+
+    resetForm()
   }
 
   return (
