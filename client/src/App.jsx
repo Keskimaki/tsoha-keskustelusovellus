@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 
 import { AppWrapper } from './assets/styles'
 import Header from './components/Header'
-import Boards from './components/Boards'
+import Boards from './components/boards'
 import Threads from './components/threads'
 import Posts from './components/posts'
 import User from './components/User'

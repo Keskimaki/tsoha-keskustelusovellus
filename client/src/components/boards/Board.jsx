@@ -2,10 +2,10 @@ import React from 'react'
 
 import { Wrapper } from '../../assets/styles'
 
-const Thread = ({ thread }) => (
+const Board = ({ board }) => (
   <Wrapper>
-    {thread.name}
+    {board.name} {board.description}
   </Wrapper>
 )
 
-export default Thread
+export default Board
