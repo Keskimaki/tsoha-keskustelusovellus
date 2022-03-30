@@ -9,7 +9,6 @@ const Header = () => {
 
   return (
     <HeaderWrapper>
-      <HeaderLink to="/">Forum</HeaderLink>
       {user
         ? <>
           <HeaderLink to="/" onClick={() => logoutUser(setUser)}>
@@ -18,10 +17,11 @@ const Header = () => {
           <HeaderLink to="/user">{user.username}</HeaderLink>
         </>
         : <>
-          <HeaderLink to="/login">Login</HeaderLink>
           <HeaderLink to="/create">Create Account</HeaderLink>
+          <HeaderLink to="/login">Login</HeaderLink>
         </>
       }
+      <HeaderLink to="/">Forum</HeaderLink>
     </HeaderWrapper>
   )
 }

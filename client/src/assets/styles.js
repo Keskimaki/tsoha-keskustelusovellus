@@ -12,6 +12,7 @@ export const AppWrapper = styled.div`
 
 export const HeaderWrapper = styled.header`
   display: flex;
+  flex-direction: row-reverse;
   gap: 0.5em;
   
   background-color: #24292e;
