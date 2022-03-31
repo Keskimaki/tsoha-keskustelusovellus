@@ -4,12 +4,12 @@
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
-    "@testing-library/react": "^12.1.4",
-    "@testing-library/user-event": "^13.5.0",
+    "@testing-library/react": "^13.0.0",
+    "@testing-library/user-event": "^14.0.3",
     "axios": "^0.26.1",
     "formik": "^2.2.9",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "react-router-dom": "^6.2.2",
     "react-scripts": "5.0.0",
     "styled-components": "^5.3.5",
@@ -41,11 +41,11 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^7.32.0",
+    "eslint": "^8.12.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.29.4"
   }
 }
