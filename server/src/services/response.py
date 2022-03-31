@@ -13,5 +13,9 @@ def json_response(data):
     if data and "time" in data[0]:
         for value in data:
             value.update({ "time": str(value["time"]) })
+    
+    if "edit" in data[0]:
+        for value in data:
+            value.update({ "edit": str(value["edit"]) })
 
     return Response(json.dumps(data), mimetype='application/json')
