@@ -1,4 +1,4 @@
-"""Queries for PostgeSQL database"""
+"""Queries for PostgreSQL database"""
 
 GET_ALL_POSTS = """
     SELECT
