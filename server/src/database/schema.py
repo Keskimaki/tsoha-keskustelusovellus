@@ -38,6 +38,7 @@ CREATE_THREAD_TABLE = """
         closed BOOLEAN DEFAULT FALSE,
         time TIMESTAMP DEFAULT CURRENT_TIMESTAMP(0)
     );
+    CREATE UNIQUE INDEX thread_name_idx ON Threads (name);
 """
 
 CREATE_POST_TABLE = """
