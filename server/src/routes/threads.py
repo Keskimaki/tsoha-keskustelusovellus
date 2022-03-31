@@ -7,6 +7,7 @@ from app import app
 from services.db import query_db, insert_into_db
 from services.user import check_admin
 from services.response import json_response
+from database import queries
 
 @app.route("/api/threads", methods=["GET"])
 def get_threads():
@@ -15,18 +16,18 @@ def get_threads():
     user_id = request.args.get("user_id")
 
     if board_id:
-        threads = query_db("SELECT * FROM Threads WHERE board_id=%s;", ( board_id, ))
+        threads = query_db(queries.GET_THREADS_BY_BOARD_ID, ( board_id, ))
     elif user_id:
-        threads = query_db("SELECT * FROM Threads WHERE user_id=%s;", ( user_id, ))
+        threads = query_db(queries.GET_THREADS_BY_USER_ID, ( user_id, ))
     else:
-        threads = query_db("SELECT * FROM Threads;")
+        threads = query_db(queries.GET_ALL_THREADS)
 
     return json_response(threads)
 
 @app.route("/api/threads/<int:thread_id>", methods=["GET"])
 def get_thread(thread_id):
     """Return a single thread by id"""
-    thread = query_db("SELECT * FROM Threads WHERE id=%s;", ( str(thread_id), ), True)
+    thread = query_db(queries.GET_THREAD_BY_ID, ( str(thread_id), ), True)
 
     if not thread:
         return { "msg": "Thread not found" }, 404
@@ -36,7 +37,7 @@ def get_thread(thread_id):
 @app.route("/api/threads/<string:thread_name>", methods=["GET"])
 def get_thread_id(thread_name):
     """Return thread id from thread name"""
-    thread_id = query_db("SELECT id FROM Threads WHERE name=%s", ( thread_name, ), True)
+    thread_id = query_db(queries.GET_THREAD_ID_BY_NAME, ( thread_name, ), True)
 
     if not thread_id:
         return { "msg": "Thread not found" }, 404
@@ -49,10 +50,7 @@ def create_thread():
     """Logged user can create a new thread"""
     body = request.json
 
-    insert_into_db(
-        "INSERT INTO Threads (user_id, board_id, name) VALUES (%s, %s, %s);",
-        ( body["user_id"], body["board_id"], body["name"] )
-    )
+    insert_into_db(queries.CREATE_THREAD, ( body["user_id"], body["board_id"], body["name"] ))
 
     return { "msg": f"Thread {body['name']} created" }, 201
 
@@ -68,10 +66,10 @@ def edit_thread(thread_id):
     body = request.json
 
     if "name" in body:
-        insert_into_db("UPDATE Threads SET name=%s WHERE id=%s;", ( body["name"], thread_id ))
+        insert_into_db(queries.EDIT_THREAD_NAME, ( body["name"], thread_id ))
 
     if check_admin() and "closed" in body:
-        insert_into_db("UPDATE Threads SET closed=%s WHERE id=%s;", ( body["closed"], thread_id ))
+        insert_into_db(queries.EDIT_THREAD_STATUS, ( body["closed"], thread_id ))
 
     return { "msg": f"Thread {body['name']} edited" }
 
@@ -84,7 +82,7 @@ def delete_thread(thread_id):
     if not thread:
         return { "msg": "Thread not found" }, 404
 
-    insert_into_db("DELETE FROM Threads WHERE id=%s;", ( thread_id, ))
+    insert_into_db(queries.DELETE_THREAD, ( thread_id, ))
 
     return { "msg": f"Thread {thread['name']} deleted" }
 
@@ -96,10 +94,6 @@ def check_and_get_thread(thread_id):
         thread = query_db("SELECT * FROM Threads WHERE id=%s;", ( thread_id, ), True)
     else:
         identity = get_jwt_identity()
-        thread = query_db(
-            """SELECT * FROM Threads WHERE id=%s AND user_id=
-                (SELECT id FROM Users WHERE username=%s);""",
-            ( thread_id, identity ), True
-        )
+        thread = query_db(queries.GET_THREAD_IF_ADMIN_OR_OWNER, ( thread_id, identity ), True)
 
     return thread
