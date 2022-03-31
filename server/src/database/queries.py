@@ -83,6 +83,18 @@ GET_THREAD_IF_ADMIN_OR_OWNER = """
         (SELECT id FROM Users WHERE username=%s);
 """
 
+GET_ALL_BOARDS = "SELECT * FROM Boards;"
+
+GET_BOARD_BY_ID = "SELECT * FROM Boards WHERE id=%s;"
+
+GET_BOARD_ID_BY_NAME = "SELECT id FROM Boards WHERE name=%s;"
+
+CREATE_BOARD = "INSERT INTO Boards (name, description, private) VALUES (%s, %s, %s);"
+
+EDIT_BOARD = "UPDATE Boards SET name=%s, description=%s, private=%s, access=%s WHERE id=%s;"
+
+DELETE_BOARD = "DELETE FROM Boards WHERE id=%s;"
+
 GET_USER_BY_ID = "SELECT * FROM Users WHERE id=%s;"
 
 GET_USER_BY_USERNAME = "SELECT * FROM Users WHERE username=%s;"

@@ -7,18 +7,19 @@ from app import app
 from services.db import query_db, insert_into_db
 from services.user import check_admin
 from services.response import json_response
+from database import queries
 
 @app.route("/api/boards", methods=["GET"])
 def get_boards():
     """Return all boards as JSON"""
-    boards = query_db("SELECT * FROM Boards;")
+    boards = query_db(queries.GET_ALL_BOARDS)
 
     return json_response(boards)
 
 @app.route("/api/boards/<int:board_id>", methods=["GET"])
 def get_board(board_id):
     """Return a single board by id"""
-    board = query_db("SELECT * FROM Boards WHERE id=%s;", ( str(board_id), ), True)
+    board = query_db(queries.GET_BOARD_BY_ID, ( str(board_id), ), True)
 
     if not board:
         return { "msg": "Board not found" }, 404
@@ -28,7 +29,7 @@ def get_board(board_id):
 @app.route("/api/boards/<string:board_name>", methods=["GET"])
 def get_board_id(board_name):
     """Return board id from board name"""
-    board_id = query_db("SELECT id FROM Boards WHERE name=%s", ( board_name, ), True)
+    board_id = query_db(queries.GET_BOARD_ID_BY_NAME, ( board_name, ), True)
 
     if not board_id:
         return { "msg": "Board not found" }, 404
@@ -47,10 +48,7 @@ def create_board():
     if not "private" in body:
         body["private"] = False
 
-    insert_into_db(
-        "INSERT INTO Boards (name, description, private) VALUES (%s, %s, %s);",
-        ( body["name"], body["description"], body["private"] )
-    )
+    insert_into_db(queries.CREATE_BOARD, ( body["name"], body["description"], body["private"] ))
 
     return { "msg": f"Board {body['name']} created" }, 201
 
@@ -61,7 +59,7 @@ def edit_board(board_id):
     if not check_admin():
         return { "msg": "Administrator privileges required" }, 401
 
-    board = query_db("SELECT * FROM Boards WHERE id=%s;", ( str(board_id), ), True)
+    board = query_db(queries.GET_BOARD_BY_ID, ( str(board_id), ), True)
 
     if not board:
         return { "msg": "Board not found" }, 404
@@ -69,8 +67,8 @@ def edit_board(board_id):
     body = request.json
 
     insert_into_db(
-        "UPDATE Boards SET name=%s, description=%s, private=%s WHERE id=%s;",
-        ( body["name"], body["description"], body["private"], board_id )
+        queries.EDIT_BOARD,
+        ( body["name"], body["description"], body["private"], body["access"], board_id )
     )
 
     return { "msg": f"Board {body['name']} edited" }
@@ -82,11 +80,11 @@ def delete_board(board_id):
     if not check_admin():
         return { "msg": "Administrator privileges required" }, 401
 
-    board = query_db("SELECT * FROM Boards WHERE id=%s;", ( str(board_id), ), True)
+    board = query_db(queries.GET_BOARD_BY_ID, ( str(board_id), ), True)
 
     if not board:
         return { "msg": "Board not found" }, 404
 
-    insert_into_db("DELETE FROM Boards WHERE id=%s;", ( board_id, ))
+    insert_into_db(queries.DELETE_BOARD, ( board_id, ))
 
     return { "msg": f"Board {board['name']} deleted" }
