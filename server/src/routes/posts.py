@@ -2,6 +2,7 @@
 
 from flask import request
 from flask_jwt_extended import jwt_required, get_jwt_identity
+from datetime import datetime
 
 from app import app
 from services.db import query_db, insert_into_db
@@ -41,7 +42,7 @@ def create_post():
     body = request.json
 
     insert_into_db(
-        "INSERT INTO Posts (user_id, thread_id, content) VALUES (%s, %s, %s);",
+        queries.CREATE_POST,
         ( body["user_id"], body["thread_id"], body["content"] )
     )
 
@@ -57,9 +58,8 @@ def edit_post(post_id):
         return { "msg": "Post not found" }, 404
 
     body = request.json
-    # TODO add timestamp from edit to post, needs to be added to db schema
     if "content" in body:
-        insert_into_db("UPDATE Posts SET content=%s WHERE id=%s;", ( body["content"], post_id ))
+        insert_into_db(queries.UPDATE_POST, ( body["content"], datetime.now(), post_id ))
 
     return { "msg": f"Post '{body['content']}' edited" }
 
@@ -72,7 +72,7 @@ def delete_post(post_id):
     if not post:
         return { "msg": "Post not found" }, 404
 
-    insert_into_db("DELETE FROM Posts WHERE id=%s;", ( post_id, ))
+    insert_into_db(queries.DELETE_POST, ( post_id, ))
 
     return { "msg": f"Post {post['content']} deleted" }
 
@@ -81,12 +81,9 @@ def check_and_get_post(post_id):
     post_id = str(post_id)
 
     if check_admin():
-        post = query_db("SELECT * FROM Posts WHERE id=%s;", ( post_id, ), True)
+        post = query_db(queries.GET_POST_BY_ID, ( post_id, ), True)
     else:
         identity = get_jwt_identity()
-        post = query_db(
-            "SELECT * FROM Posts WHERE id=%s AND user_id=(SELECT id FROM Users WHERE username=%s);",
-            ( post_id, identity ), True
-        )
+        post = query_db(queries.GET_POST_BY_ID_AND_USER_ID, ( post_id, identity ), True)
 
     return post
