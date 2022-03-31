@@ -7,6 +7,7 @@ from app import app, bcrypt
 from services.db import query_db, insert_into_db
 from services.user import generate_user_session
 from services.response import json_response
+from database import queries
 
 @app.route("/api/users", methods=["GET"])
 def get_users():
@@ -18,7 +19,7 @@ def get_users():
 @app.route("/api/users/<int:user_id>", methods=["GET"])
 def get_user(user_id):
     """Return a single user by id"""
-    user = query_db("SELECT * FROM Users WHERE id=%s;", ( str(user_id), ), True)
+    user = query_db(queries.GET_USER_BY_ID, ( str(user_id), ), True)
 
     if not user:
         return { "msg": "User not found" }, 404

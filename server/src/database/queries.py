@@ -38,3 +38,7 @@ DELETE_POST = "DELETE FROM Posts WHERE id=%s;"
 GET_POST_BY_ID_AND_USER_ID = """
     SELECT * FROM Posts WHERE id=%s AND user_id=(SELECT id FROM Users WHERE username=%s);
 """
+
+GET_USER_BY_ID = "SELECT * FROM Users WHERE id=%s;"
+
+GET_USER_BY_USERNAME = "SELECT * FROM Users WHERE username=%s;"
