@@ -1,8 +1,9 @@
 """Router for post related api requests"""
 
+from datetime import datetime
+
 from flask import request
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from datetime import datetime
 
 from app import app
 from services.db import query_db, insert_into_db

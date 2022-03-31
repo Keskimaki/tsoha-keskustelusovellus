@@ -5,8 +5,8 @@ import os
 # Allow imports from parent directory
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 #pylint: disable=wrong-import-position, import-error
-from database import schema
 from testing import insert_test_data
+from database import schema
 from services.db import get_db_connection
 
 conn = get_db_connection()
