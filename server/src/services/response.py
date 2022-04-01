@@ -10,6 +10,8 @@ def json_response(data):
             data.update({ "time": str(data["time"]) })
         if "edit" in data:
             data.update({ "edit": str(data["edit"]) })
+        
+        return data
 
     if data and "time" in data[0]:
         for value in data:

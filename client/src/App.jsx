@@ -19,11 +19,11 @@ const App = () => (
         <Header />
         <Routes>
           <Route path="/" element={<Boards />} />
-          <Route path="/picture" element={<AddPicture />} />
           <Route path="/:boardName" element={<Threads />} />
           <Route path="/:boardName/:threadName" element={<Posts />} />
           <Route path="/create" element={<User />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/picture" element={<AddPicture />} />
         </Routes>
         <Footer />
       </UserProvider>
