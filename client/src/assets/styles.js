@@ -5,18 +5,18 @@ import { Field } from 'formik'
 export const AppWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   background-color: #262626;
   height: 100vh;
   margin: 0;
 `
 
 export const HeaderWrapper = styled.header`
+  width: 100vw;
   display: flex;
   flex-direction: row-reverse;
-  gap: 0.5em;
-  
   background-color: black;
-  padding: 1em;
+  padding: 1em 0em;
 `
 
 export const HeaderLink = styled(RouterLink)`
@@ -24,13 +24,16 @@ export const HeaderLink = styled(RouterLink)`
   color: white;
   font-size: 1.5em;
   font-weight: bold;
+  margin-right: 0.5em;
 `
 
 export const Wrapper = styled.div`
+  width: 80vw; 
   color: white;
   background-color: #4d4d4d;
-  font-size: 1.25em;
+  font-size: 1.5em;
   margin: 0.5em 1em;
+  border-radius: 0.5em;
   padding: 1em;
 `
 
@@ -51,7 +54,7 @@ export const Button = styled.button`
   margin: 0.5em;
   padding: 0.25em 1em;
   border: 2px solid dodgerblue;
-  border-radius: 3px;
+  border-radius: 0.5em;
 `
 
 export const TextField = styled(Field)`
@@ -64,9 +67,10 @@ export const TextField = styled(Field)`
 `
 
 export const FooterWrapper = styled.footer`
+  width: 100vw;
   margin-top: auto;
   background-color: black;
   color: white;
   text-align: center;
-  padding: 1em;
+  padding: 1em 0em;
 `
