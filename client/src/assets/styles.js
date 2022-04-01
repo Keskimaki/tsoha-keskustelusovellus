@@ -47,6 +47,17 @@ export const Title = styled.h1`
   margin: 0.5em;
 `
 
+export const Text = styled.p`
+  color: white;
+  margin: 0em;
+`
+
+export const SecondaryText = styled.span`
+  font-size: 0.8em;
+  color: #828282;
+  margin: 0em;
+`
+
 export const Button = styled.button`
   background: dodgerblue;
   color: white;
@@ -80,4 +91,13 @@ export const FooterWrapper = styled.footer`
   color: white;
   text-align: center;
   padding: 1em 0em;
+`
+export const Image = styled.img`
+  width: 40%;
+  height: auto;
+`
+
+export const LargeImage = styled.img`
+  width: 80%;
+  height: auto;
 `
