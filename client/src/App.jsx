@@ -9,8 +9,9 @@ import Posts from './components/posts'
 import User from './components/User'
 import Login from './components/Login'
 import Footer from './components/Footer'
-
 import UserProvider from './components/UserProvider'
+
+import AddPicture from './components/AddPicture'
 
 const App = () => (
     <AppWrapper>
@@ -18,6 +19,7 @@ const App = () => (
         <Header />
         <Routes>
           <Route path="/" element={<Boards />} />
+          <Route path="/picture" element={<AddPicture />} />
           <Route path="/:boardName" element={<Threads />} />
           <Route path="/:boardName/:threadName" element={<Posts />} />
           <Route path="/create" element={<User />} />
