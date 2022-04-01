@@ -1,10 +1,11 @@
 import React from 'react'
 
-import { Wrapper } from '../../assets/styles'
+import { Wrapper, Text, SecondaryText } from '../../assets/styles'
 
 const Thread = ({ thread }) => (
   <Wrapper>
-    {thread.name}
+    <strong>{thread.username}</strong> <SecondaryText>{thread.time}</SecondaryText>
+    <Text>{thread.name}</Text>
   </Wrapper>
 )
 

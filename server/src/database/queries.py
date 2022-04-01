@@ -2,7 +2,7 @@
 
 GET_ALL_POSTS = """
     SELECT
-        P.id, P.user_id, P.thread_id, P.content, P.edit, P.time, U.username, U.admin
+        P.id, P.user_id, P.thread_id, P.content, P.image, P.edit, P.time, U.username, U.admin
     FROM
         Posts P, Users U
     WHERE
@@ -11,7 +11,7 @@ GET_ALL_POSTS = """
 
 GET_POSTS_BY_THREAD_ID = """
     SELECT
-        P.id, P.user_id, P.content, P.time, P.edit, U.username, U.admin
+        P.id, P.user_id, P.content, P.image, P.edit, P.time, U.username, U.admin
     FROM
         Posts P, Users U
     WHERE
@@ -22,7 +22,7 @@ GET_POSTS_BY_USER_ID = "SELECT * FROM Posts WHERE user_id=%s;"
 
 GET_POST_BY_ID = """
     SELECT
-        P.id, P.user_id, P.thread_id, P.content, P.time, U.username, U.admin
+        P.id, P.user_id, P.thread_id, P.content, P.image, P.edit, P.time, U.username, U.admin
     FROM
         Posts P, Users U
     WHERE

@@ -11,7 +11,6 @@ const MakeThread = ({ setThreads }) => {
   const { boardName } = useParams()
 
   const handleThreadCreation = async ({ name, content }, { resetForm }) => {
-    print(content)
     await makeThread(user.token, user.id, boardName, name, content)
 
     const data = await getThreads(boardName)
