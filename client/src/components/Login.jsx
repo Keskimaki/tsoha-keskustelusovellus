@@ -4,7 +4,7 @@ import { Formik, Form } from 'formik'
 
 import { loginUser } from '../services/login'
 import { updateUser } from '../services/user'
-import { Title, TextField, Button } from '../assets/styles'
+import { FormWrapper, Title, TextField, Button } from '../assets/styles'
 import { UserContext } from './UserProvider'
 
 const Login = () => {
@@ -19,7 +19,7 @@ const Login = () => {
   }
 
   return (
-    <div>
+    <FormWrapper>
       <Title>Login</Title>
       <Formik
         initialValues={{ username: '', password: '' }}
@@ -30,7 +30,7 @@ const Login = () => {
           <Button primary type="submit">Login</Button>
         </Form>
       </Formik>
-    </div>
+    </FormWrapper>
   )
 }
 

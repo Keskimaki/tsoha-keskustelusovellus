@@ -1,6 +1,7 @@
 """Router for image related api requests"""
 
 from flask import request, make_response
+from flask_jwt_extended import jwt_required
 
 from app import app
 from services.db import query_db, insert_into_db
@@ -9,6 +10,10 @@ from services.db import query_db, insert_into_db
 def upload_image(post_id):
     """New image can be uploaded"""
     file = request.files["file"]
+    
+    if not file:
+        return { "msg": "No image provided" }, 400
+
     data = file.read()
 
     insert_into_db(

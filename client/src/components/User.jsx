@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Formik, Form } from 'formik'
 
 import { createUser, updateUser } from '../services/user'
-import { Title, Button, TextField } from '../assets/styles'
+import { FormWrapper, Title, Button, TextField } from '../assets/styles'
 import { UserContext } from './UserProvider'
 
 const User = () => {
@@ -24,7 +24,7 @@ const User = () => {
   }
 
   return (
-    <div>
+    <FormWrapper>
       <Title>Create Account</Title>
       <Formik
         initialValues={{ username: '', password: '', repeatPassword: '' }}
@@ -36,7 +36,7 @@ const User = () => {
             <Button type="submit">Create Account</Button>
           </Form>
       </Formik>
-    </div>
+    </FormWrapper>
   )
 }
 

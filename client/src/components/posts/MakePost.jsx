@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { Formik, Form } from 'formik'
 
-import { Title, TextField, Button } from '../../assets/styles'
+import { FormWrapper, Title, TextField, Button } from '../../assets/styles'
 import { getPosts, makePost } from '../../services/posts'
 import { UserContext } from '../UserProvider'
 
@@ -19,8 +19,12 @@ const MakePost = ({ setPosts }) => {
     resetForm()
   }
 
+  if (!user) {
+    return null
+  }
+
   return (
-    <div>
+    <FormWrapper>
       <Title>Make Post</Title>
       <Formik
         initialValues={{ content: '' }}
@@ -30,7 +34,7 @@ const MakePost = ({ setPosts }) => {
           <Button primary type="submit">Post</Button>
         </Form>
       </Formik>
-    </div>
+    </FormWrapper>
   )
 }
 

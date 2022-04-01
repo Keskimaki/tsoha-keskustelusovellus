@@ -57,8 +57,15 @@ export const Button = styled.button`
   border-radius: 0.5em;
 `
 
+export const FormWrapper = styled(Wrapper)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
 export const TextField = styled(Field)`
   color: white;
+  font-size: 1em;
   background-color: #4d4d4d;
   border: 0.2em solid #24292e;
   border-radius: 0.3em;

@@ -7,7 +7,7 @@ const Post = ({ post }) => {
       <Wrapper>
         <strong>{post.username}</strong>
         <br />
-        {post.content} {post.username}
+        {post.content}
       </Wrapper>
   )
 }
