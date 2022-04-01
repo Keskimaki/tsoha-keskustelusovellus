@@ -21,3 +21,4 @@ from routes import login
 from routes import boards
 from routes import threads
 from routes import posts
+from routes import images
