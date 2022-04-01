@@ -68,6 +68,14 @@ export const Button = styled.button`
   border-radius: 0.5em;
 `
 
+export const SmallButton = styled.button`
+  background: dodgerblue;
+  color: white;
+  margin: 0.5em 0.5em 0.5em 0em;
+  border: 2px solid dodgerblue;
+  border-radius: 0.5em;
+`
+
 export const FormWrapper = styled(Wrapper)`
   display: flex;
   flex-direction: column;
