@@ -11,7 +11,7 @@ def upload_image(post_id):
     post_id = str(post_id)
 
     file = request.files["file"]
-    
+
     if not file:
         return { "msg": "No image provided" }, 400
 
