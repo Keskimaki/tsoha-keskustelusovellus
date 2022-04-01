@@ -16,9 +16,11 @@ cur = conn.cursor()
 cur.execute(schema.DROP_TABLES)
 
 cur.execute(schema.CREATE_USER_TABLE)
+cur.execute(schema.CREATE_PROFILE_PICTURE_TABLE)
 cur.execute(schema.CREATE_BOARD_TABLE)
 cur.execute(schema.CREATE_THREAD_TABLE)
 cur.execute(schema.CREATE_POST_TABLE)
+cur.execute(schema.CREATE_IMAGE_TABLE)
 
 insert_test_data(cur)
 

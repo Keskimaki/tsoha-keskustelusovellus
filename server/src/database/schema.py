@@ -1,9 +1,11 @@
 """Schema for PostgreSQL database"""
 
 DROP_TABLES = """
+    DROP TABLE IF EXISTS Images;
     DROP TABLE IF EXISTS Posts;
     DROP TABLE IF EXISTS Threads;
     DROP TABLE IF EXISTS Boards;
+    DROP TABLE IF EXISTS ProfilePictures;
     DROP TABLE IF EXISTS Users;
 """
 
@@ -48,6 +50,23 @@ CREATE_POST_TABLE = """
         thread_id INTEGER REFERENCES Threads NOT NULL,
         content TEXT NOT NULL,
         edit TIMESTAMP,
+        image BOOLEAN DEFAULT FALSE,
         time TIMESTAMP DEFAULT CURRENT_TIMESTAMP(0)
+    );
+"""
+
+CREATE_IMAGE_TABLE = """
+    CREATE TABLE Images (
+        id SERIAL PRIMARY KEY,
+        post_id INTEGER REFERENCES Posts NOT NULL,
+        data BYTEA NOT NULL
+    );
+"""
+
+CREATE_PROFILE_PICTURE_TABLE = """
+    CREATE TABLE ProfilePictures (
+        id SERIAL PRIMARY KEY,
+        user_id INTEGER REFERENCES Users NOT NULL,
+        data BYTEA NOT NULL
     );
 """
