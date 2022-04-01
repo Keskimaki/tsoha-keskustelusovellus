@@ -8,7 +8,8 @@ def json_response(data):
     if isinstance(data, dict):
         if "time" in data:
             data.update({ "time": str(data["time"]) })
-        return data
+        if "edit" in data:
+            data.update({ "edit": str(data["edit"]) })
 
     if data and "time" in data[0]:
         for value in data:

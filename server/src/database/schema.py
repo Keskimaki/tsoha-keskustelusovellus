@@ -59,6 +59,7 @@ CREATE_IMAGE_TABLE = """
     CREATE TABLE Images (
         id SERIAL PRIMARY KEY,
         post_id INTEGER REFERENCES Posts NOT NULL,
+        name TEXT NOT NULL,
         data BYTEA NOT NULL
     );
 """
@@ -67,6 +68,7 @@ CREATE_PROFILE_PICTURE_TABLE = """
     CREATE TABLE ProfilePictures (
         id SERIAL PRIMARY KEY,
         user_id INTEGER REFERENCES Users NOT NULL,
+        name TEXT NOT NULL,
         data BYTEA NOT NULL
     );
 """
