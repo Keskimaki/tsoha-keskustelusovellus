@@ -58,6 +58,11 @@ export const SecondaryText = styled.span`
   margin: 0em;
 `
 
+export const SecondaryTextRight = styled(SecondaryText)`
+  position: absolute;
+  right: 10vw;
+`
+
 export const Button = styled.button`
   background: dodgerblue;
   color: white;
@@ -106,6 +111,6 @@ export const Image = styled.img`
 `
 
 export const LargeImage = styled.img`
-  width: 80%;
+  width: 100%;
   height: auto;
 `
