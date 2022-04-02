@@ -76,6 +76,8 @@ EDIT_THREAD_NAME = "UPDATE Threads SET name=%s WHERE id=%s;"
 
 EDIT_THREAD_STATUS = "UPDATE Threads SET closed=%s WHERE id=%s;"
 
+DELETE_POSTS_BY_THREAD_ID = "DELETE FROM Posts WHERE thread_id=%s;"
+
 DELETE_THREAD = "DELETE FROM Threads WHERE id=%s;"
 
 GET_THREAD_IF_ADMIN_OR_OWNER = """

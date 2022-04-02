@@ -82,6 +82,8 @@ def delete_thread(thread_id):
     if not thread:
         return { "msg": "Thread not found" }, 404
 
+    insert_into_db(queries.DELETE_POSTS_BY_THREAD_ID, ( thread_id, ))
+
     insert_into_db(queries.DELETE_THREAD, ( thread_id, ))
 
     return { "msg": f"Thread {thread['name']} deleted" }
