@@ -35,6 +35,10 @@ const PostButtons = ({ post, updatePosts }) => {
       return
     }
 
+    if (post.image) {
+      await removeImage(user.token, post.id)
+    }
+
     await deletePost(user.token, post.id)
     await updatePosts()
   }
