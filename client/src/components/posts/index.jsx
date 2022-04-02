@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router'
-import { useNavigate } from 'react-router-dom'
 
-import { Title, SmallButton } from '../../assets/styles'
+import { Title } from '../../assets/styles'
 import { getPosts } from '../../services/posts'
-import { editThread, deleteThread } from '../../services/threads'
 import Post from './post'
 import MakePost from './MakePost'
+import ThreadButtons from '../threads/ThreadButtons'
 import { UserContext } from '../user/UserProvider'
 
 const Posts = () => {
@@ -17,7 +16,7 @@ const Posts = () => {
 
   const updatePosts = async () => {
     const data = await getPosts(threadName)
-    setPosts(data)
+    setPosts(data.sort(post => post.id))
   }
 
   useEffect(async () => {
@@ -32,45 +31,10 @@ const Posts = () => {
         {(user && posts[0]) && (user.id === posts[0].user_id || user.admin) &&
           <ThreadButtons />}
       </Title>
-      {posts.sort(post => post.id).map(post =>
+      {posts.map(post =>
         <Post key={post.id} post={post} updatePosts={updatePosts} />
       )}
-      <MakePost setPosts={setPosts} />
-    </div>
-  )
-}
-
-const ThreadButtons = () => {
-  const navigate = useNavigate()
-  const [user] = useContext(UserContext)
-  const { boardName, threadName } = useParams()
-
-  const handleThreadNameEditing = async () => {
-    const name = window.prompt('Edit thread title:', threadName)
-
-    if (!name) {
-      return
-    }
-
-    await editThread(user.token, threadName, name)
-
-    navigate(`/${boardName}/${name}`)
-  }
-
-  const handleThreadDeletion = async () => {
-    if (!window.confirm('Are you sure you want to delete this thread?')) {
-      return
-    }
-
-    await deleteThread(user.token, threadName)
-
-    navigate('/')
-  }
-
-  return (
-    <div>
-        <SmallButton onClick={handleThreadNameEditing}>Edit</SmallButton>
-        <SmallButton onClick={handleThreadDeletion}>Delete</SmallButton>
+      <MakePost updatePosts={updatePosts} />
     </div>
   )
 }

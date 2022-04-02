@@ -11,12 +11,12 @@ const User = () => {
 
   useEffect(async () => {
     const data = await getPostsByUser(userId)
-    setPosts(data)
+    setPosts(data.sort(post => post.id))
   }, [])
 
   return (
     <div>
-      {posts.sort(post => post.id).map(post =>
+      {posts.map(post =>
         <Post key={post.id} post={post} />
       )}
     </div>
