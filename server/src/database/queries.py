@@ -98,3 +98,9 @@ DELETE_BOARD = "DELETE FROM Boards WHERE id=%s;"
 GET_USER_BY_ID = "SELECT * FROM Users WHERE id=%s;"
 
 GET_USER_BY_USERNAME = "SELECT * FROM Users WHERE username=%s;"
+
+GET_IMAGE_BY_POST_ID = "SELECT * FROM Images WHERE post_id=%s;"
+
+CREATE_IMAGE = "INSERT INTO Images (post_id, name, data) VALUES (%s, %s. %s);"
+
+ADD_IMAGE_TO_POST = "UPDATE Posts SET image=true WHERE id=%s;"
