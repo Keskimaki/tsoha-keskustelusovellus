@@ -16,7 +16,7 @@ const Posts = () => {
 
   const updatePosts = async () => {
     const data = await getPosts(threadName)
-    setPosts(data.sort(post => post.id))
+    setPosts(data.sort((a, b) => a.id - b.id))
   }
 
   useEffect(async () => {

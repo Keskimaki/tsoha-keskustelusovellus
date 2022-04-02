@@ -11,7 +11,7 @@ const User = () => {
 
   useEffect(async () => {
     const data = await getPostsByUser(userId)
-    setPosts(data.sort(post => post.id))
+    setPosts(data.sort((a, b) => b.id - a.id))
   }, [])
 
   return (
