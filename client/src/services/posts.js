@@ -27,3 +27,10 @@ const getThreadId = async threadName => {
   const res = await axios.get(`${BASE_URI}/threads/${threadName}`)
   return res.data.id
 }
+
+export const deletePost = async (token, postId) => {
+  const auth = { headers: { Authorization: token } }
+
+  const res = await axios.delete(`${BASE_URI}/posts/${postId}`, auth)
+  return res.data
+}

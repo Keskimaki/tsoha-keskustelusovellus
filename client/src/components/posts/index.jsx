@@ -11,9 +11,13 @@ const Posts = () => {
 
   const { boardName, threadName } = useParams()
 
-  useEffect(async () => {
+  const updatePosts = async () => {
     const data = await getPosts(threadName)
     setPosts(data)
+  }
+
+  useEffect(async () => {
+    await updatePosts()
   }, [])
 
   return (
@@ -21,7 +25,7 @@ const Posts = () => {
       <Title>{boardName}</Title>
       <Title>{threadName}</Title>
       {posts.map(post =>
-        <Post key={post.id} post={post} />
+        <Post key={post.id} post={post} updatePosts={updatePosts} />
       )}
       <MakePost setPosts={setPosts} />
     </div>
