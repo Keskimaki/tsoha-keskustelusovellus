@@ -30,9 +30,9 @@ const User = () => {
         initialValues={{ username: '', password: '', repeatPassword: '' }}
         onSubmit={handleAccountCreation}>
           <Form>
-            <TextField name="username" type="text" /> <br />
-            <TextField name="password" type="password" /> <br />
-            <TextField name="repeatPassword" type="password" /> <br />
+            <TextField name="username" placeholder="username" type="text" /> <br />
+            <TextField name="password" placeholder="password" type="password" /> <br />
+            <TextField name="repeatPassword" placeholder="repeat password" type="password" /> <br />
             <Button type="submit">Create Account</Button>
           </Form>
       </Formik>

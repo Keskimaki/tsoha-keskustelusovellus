@@ -25,8 +25,8 @@ const Login = () => {
         initialValues={{ username: '', password: '' }}
         onSubmit={handleLogin}>
         <Form>
-          <TextField name="username" type="text" /> <br />
-          <TextField name="password" type="password" /> <br />
+          <TextField name="username" placeholder="username" type="text" /> <br />
+          <TextField name="password" placeholder="password" type="password" /> <br />
           <Button primary type="submit">Login</Button>
         </Form>
       </Formik>

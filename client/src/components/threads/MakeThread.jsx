@@ -30,8 +30,8 @@ const MakeThread = ({ setThreads }) => {
         initialValues={{ name: '', content: '' }}
         onSubmit={handleThreadCreation}>
         <Form>
-          <TextField name="name" type="text" /> <br />
-          <TextField name="content" type="text" /> <br />
+          <TextField name="name" placeholder="title" type="text" /> <br />
+          <TextField name="content" placeholder="content" type="text" /> <br />
           <Button primary type="submit">Make thread</Button>
         </Form>
       </Formik>
