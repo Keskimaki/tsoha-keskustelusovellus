@@ -1,31 +1,45 @@
 import React, { useState, useContext } from 'react'
 
 import { Wrapper, Text, SecondaryText, SmallButton, Image, LargeImage } from '../../assets/styles'
+import AddImage from './AddImage'
 import { editPost, deletePost } from '../../services/posts'
 import { UserContext } from '../UserProvider'
 import { BASE_URI } from '../../config'
 
 const Post = ({ post, updatePosts }) => {
-  const [image, setImage] = useState(false)
   const [user] = useContext(UserContext)
 
   return (
       <Wrapper>
         <strong>{post.username}</strong> <SecondaryText>{post.time}</SecondaryText>
         <Text>{post.content}</Text>
-        {user && user.id === post.user_id && <Buttons post={post} updatePosts={updatePosts} />}
+        {user && user.id === post.user_id &&
+          <PostButtons post={post} updatePosts={updatePosts} />}
+        {post.image && <PostImage postId={post.id} />}
         {post.edit !== 'None' &&
           <SecondaryText>edited {post.edit.substring(0, 19)}</SecondaryText>}
-        {post.image &&
-          (image
-            ? <LargeImage onClick={() => setImage(!image)} src={`${BASE_URI}/images/${post.id}`} />
-            : <Image onClick={() => setImage(!image)} src={`${BASE_URI}/images/${post.id}`} />
-          )}
       </Wrapper>
   )
 }
 
-const Buttons = ({ post, updatePosts }) => {
+const PostImage = ({ postId }) => {
+  const [imageFocus, setImageFocus] = useState(false)
+
+  return (
+    <div>
+      {imageFocus
+        ? <LargeImage
+          onClick={() => setImageFocus(!imageFocus)}
+          src={`${BASE_URI}/images/${postId}`} />
+        : <Image
+          onClick={() => setImageFocus(!imageFocus)}
+          src={`${BASE_URI}/images/${postId}`} />}
+    </div>
+  )
+}
+
+const PostButtons = ({ post, updatePosts }) => {
+  const [imageFocus, setImageFocus] = useState(false)
   const [user] = useContext(UserContext)
 
   const handlePostEditing = async () => {
@@ -52,9 +66,10 @@ const Buttons = ({ post, updatePosts }) => {
     <div>
       {post.image
         ? <SmallButton>Remove image</SmallButton>
-        : <SmallButton>Add image</SmallButton>}
+        : <SmallButton onClick={() => setImageFocus(!imageFocus)}>Add image</SmallButton>}
       <SmallButton onClick={handlePostEditing}>Edit</SmallButton>
       <SmallButton onClick={handlePostDeletion}>Delete</SmallButton>
+      {imageFocus && <AddImage postId={post.id} />}
     </div>
   )
 }

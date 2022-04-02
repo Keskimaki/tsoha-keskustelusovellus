@@ -11,8 +11,6 @@ import Login from './components/Login'
 import Footer from './components/Footer'
 import UserProvider from './components/UserProvider'
 
-import AddPicture from './components/AddPicture'
-
 const App = () => (
     <AppWrapper>
       <UserProvider>
@@ -23,7 +21,6 @@ const App = () => (
           <Route path="/:boardName/:threadName" element={<Posts />} />
           <Route path="/create" element={<User />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/picture" element={<AddPicture />} />
         </Routes>
         <Footer />
       </UserProvider>
