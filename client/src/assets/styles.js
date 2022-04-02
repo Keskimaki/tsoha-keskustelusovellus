@@ -14,7 +14,7 @@ export const AppWrapper = styled.div`
 export const HeaderWrapper = styled.header`
   width: 100vw;
   display: flex;
-  flex-direction: row-reverse;
+  justify-content: center;
   background-color: black;
   padding: 1em 0em;
 `

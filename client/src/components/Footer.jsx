@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { FooterWrapper } from '../assets/styles'
+import { FooterWrapper, Text } from '../assets/styles'
 
 const Footer = () => (
     <FooterWrapper>
-        Under construction
+        <Text>Tietokantasovellus 2022 kevät</Text>
     </FooterWrapper>
 )
 
