@@ -1,6 +1,7 @@
 """Router for image related api requests"""
 
 from flask import request, make_response
+from flask_jwt_extended import jwt_required
 
 from app import app
 from services.db import query_db, insert_into_db
@@ -22,6 +23,7 @@ def get_image(post_id):
     return response
 
 @app.route("/api/images/<int:post_id>", methods=["POST"])
+@jwt_required()
 def upload_image(post_id):
     """New image can be uploaded"""
     post_id = str(post_id)
@@ -33,7 +35,7 @@ def upload_image(post_id):
 
     data = file.read()
 
-    insert_into_db(queries.CREATE_IMAGE, ( post_id, file.filename, data ))
+    insert_into_db(queries.ADD_IMAGE, ( post_id, file.filename, data ))
 
     insert_into_db(queries.ADD_IMAGE_TO_POST, ( post_id, ))
 
