@@ -25,7 +25,7 @@ def get_image(post_id):
 @app.route("/api/images/<int:post_id>", methods=["POST"])
 @jwt_required()
 def upload_image(post_id):
-    """New image can be uploaded"""
+    """User can upload image to post"""
     post_id = str(post_id)
 
     file = request.files["file"]
@@ -40,3 +40,20 @@ def upload_image(post_id):
     insert_into_db(queries.ADD_IMAGE_TO_POST, ( post_id, ))
 
     return { "msg": "Image uploaded" }, 201
+
+@app.route("/api/images/<int:post_id>", methods=["DELETE"])
+@jwt_required()
+def remove_image(post_id):
+    """User can remove image from post"""
+    post_id = str(post_id)
+
+    image = query_db(queries.GET_IMAGE_BY_POST_ID, ( post_id, ), True)
+
+    if not image:
+        return { "msg": "Image not found" }, 404
+
+    insert_into_db(queries.REMOVE_IMAGE_BY_POST_ID, ( post_id, ))
+
+    insert_into_db(queries.REMOVE_IMAGE_FROM_POST, ( post_id, ))
+
+    return { "msg": "Image removed" }
