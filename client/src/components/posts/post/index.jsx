@@ -14,7 +14,7 @@ const Post = ({ post, updatePosts }) => {
         {post.admin && <SecondaryText>admin</SecondaryText>}
         <SecondaryTextRight>{post.time}</SecondaryTextRight>
         <Text>{post.content}</Text>
-        {user && user.id === post.user_id &&
+        {user && (user.id === post.user_id || user.admin) &&
           <PostButtons post={post} updatePosts={updatePosts} />}
         {post.image && <PostImage postId={post.id} />}
         {post.edit !== 'None' &&
