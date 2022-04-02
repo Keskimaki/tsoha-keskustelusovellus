@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react'
 import { Wrapper, Text, SecondaryText, SmallButton, Image, LargeImage } from '../../assets/styles'
 import AddImage from './AddImage'
 import { editPost, deletePost } from '../../services/posts'
+import { removeImage } from '../../services/images'
 import { UserContext } from '../UserProvider'
 import { BASE_URI } from '../../config'
 
@@ -42,6 +43,15 @@ const PostButtons = ({ post, updatePosts }) => {
   const [imageFocus, setImageFocus] = useState(false)
   const [user] = useContext(UserContext)
 
+  const handleImageRemoval = async () => {
+    if (!window.confirm('Are you sure you want to remove this image?')) {
+      return
+    }
+
+    await removeImage(user.token, post.id)
+    await updatePosts()
+  }
+
   const handlePostEditing = async () => {
     const content = window.prompt('Edit your post:', post.content)
 
@@ -65,11 +75,11 @@ const PostButtons = ({ post, updatePosts }) => {
   return (
     <div>
       {post.image
-        ? <SmallButton>Remove image</SmallButton>
+        ? <SmallButton onClick={handleImageRemoval}>Remove image</SmallButton>
         : <SmallButton onClick={() => setImageFocus(!imageFocus)}>Add image</SmallButton>}
       <SmallButton onClick={handlePostEditing}>Edit</SmallButton>
       <SmallButton onClick={handlePostDeletion}>Delete</SmallButton>
-      {imageFocus && <AddImage postId={post.id} />}
+      {imageFocus && <AddImage postId={post.id} updatePosts={updatePosts} setImageFocus={setImageFocus} />}
     </div>
   )
 }

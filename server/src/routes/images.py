@@ -23,7 +23,6 @@ def get_image(post_id):
     return response
 
 @app.route("/api/images/<int:post_id>", methods=["POST"])
-@jwt_required()
 def upload_image(post_id):
     """User can upload image to post"""
     post_id = str(post_id)
