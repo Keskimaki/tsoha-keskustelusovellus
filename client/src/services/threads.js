@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 import { BASE_URI } from '../config'
-import { makePost } from './posts'
+import { makePost, getThreadId } from './posts'
 
 export const getThreads = async boardName => {
   const boardId = await getBoardId(boardName)
@@ -24,6 +24,14 @@ export const makeThread = async (token, userId, boardName, name, content) => {
 
   await makePost(token, userId, name, content)
 
+  return res.data
+}
+
+export const editThread = async (token, threadName, name) => {
+  const auth = { headers: { Authorization: token } }
+  const threadId = await getThreadId(threadName)
+
+  const res = await axios.put(`${BASE_URI}/threads/${threadId}`, { name }, auth)
   return res.data
 }
 

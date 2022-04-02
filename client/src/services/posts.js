@@ -23,7 +23,7 @@ export const makePost = async (token, userId, threadName, content) => {
   return res.data
 }
 
-const getThreadId = async threadName => {
+export const getThreadId = async threadName => {
   const res = await axios.get(`${BASE_URI}/threads/${threadName}`)
   return res.data.id
 }
