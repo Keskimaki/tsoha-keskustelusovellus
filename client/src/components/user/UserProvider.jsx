@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext } from 'react'
 
-import { checkLogin } from '../services/login'
+import { checkLogin } from '../../services/login'
 
 export const UserContext = createContext()
 

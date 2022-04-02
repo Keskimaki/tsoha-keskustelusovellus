@@ -6,10 +6,11 @@ import Header from './components/Header'
 import Boards from './components/boards'
 import Threads from './components/threads'
 import Posts from './components/posts'
-import User from './components/User'
+import User from './components/user'
+import MakeUser from './components/user/MakeUser'
 import Login from './components/Login'
 import Footer from './components/Footer'
-import UserProvider from './components/UserProvider'
+import UserProvider from './components/user/UserProvider'
 
 const App = () => (
     <AppWrapper>
@@ -19,7 +20,8 @@ const App = () => (
           <Route path="/" element={<Boards />} />
           <Route path="/:boardName" element={<Threads />} />
           <Route path="/:boardName/:threadName" element={<Posts />} />
-          <Route path="/create" element={<User />} />
+          <Route path="/user/:userId" element={<User />} />
+          <Route path="/create" element={<MakeUser />} />
           <Route path="/login" element={<Login />} />
         </Routes>
         <Footer />

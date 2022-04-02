@@ -9,6 +9,11 @@ export const getPosts = async threadName => {
   return res.data
 }
 
+export const getPostsByUser = async userId => {
+  const res = await axios.get(`${BASE_URI}/posts?user_id=${userId}`)
+  return res.data
+}
+
 export const makePost = async (token, userId, threadName, content) => {
   const auth = { headers: { Authorization: token } }
   const threadId = await getThreadId(threadName)

@@ -2,11 +2,11 @@ import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Formik, Form } from 'formik'
 
-import { createUser, updateUser } from '../services/user'
-import { FormWrapper, Title, Button, TextField } from '../assets/styles'
+import { createUser, updateUser } from '../../services/user'
+import { FormWrapper, Title, Button, TextField } from '../../assets/styles'
 import { UserContext } from './UserProvider'
 
-const User = () => {
+const MakeUser = () => {
   const context = useContext(UserContext)
   const navigate = useNavigate()
 
@@ -40,4 +40,4 @@ const User = () => {
   )
 }
 
-export default User
+export default MakeUser

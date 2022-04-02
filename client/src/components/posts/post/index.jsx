@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 
 import { Wrapper, Text, SecondaryText, SecondaryTextRight } from '../../../assets/styles'
-import { UserContext } from '../../UserProvider'
+import { UserContext } from '../../user/UserProvider'
 import PostButtons from './PostButtons'
 import PostImage from './PostImage'
 

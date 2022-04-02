@@ -7,7 +7,7 @@ import { getPosts } from '../../services/posts'
 import { editThread, deleteThread } from '../../services/threads'
 import Post from './post'
 import MakePost from './MakePost'
-import { UserContext } from '../UserProvider'
+import { UserContext } from '../user/UserProvider'
 
 const Posts = () => {
   const [user] = useContext(UserContext)
@@ -32,7 +32,7 @@ const Posts = () => {
         {(user && posts[0]) && (user.id === posts[0].user_id || user.admin) &&
           <ThreadButtons />}
       </Title>
-      {posts.map(post =>
+      {posts.sort(post => post.id).map(post =>
         <Post key={post.id} post={post} updatePosts={updatePosts} />
       )}
       <MakePost setPosts={setPosts} />

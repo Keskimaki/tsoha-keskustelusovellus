@@ -4,7 +4,7 @@ import { Formik, Form } from 'formik'
 
 import { FormWrapper, Title, TextField, Button } from '../../assets/styles'
 import { getThreads, makeThread } from '../../services/threads'
-import { UserContext } from '../UserProvider'
+import { UserContext } from '../user/UserProvider'
 
 const MakeThread = ({ setThreads }) => {
   const [user] = useContext(UserContext)

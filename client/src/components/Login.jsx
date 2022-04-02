@@ -5,7 +5,7 @@ import { Formik, Form } from 'formik'
 import { loginUser } from '../services/login'
 import { updateUser } from '../services/user'
 import { FormWrapper, Title, TextField, Button } from '../assets/styles'
-import { UserContext } from './UserProvider'
+import { UserContext } from './user/UserProvider'
 
 const Login = () => {
   const context = useContext(UserContext)

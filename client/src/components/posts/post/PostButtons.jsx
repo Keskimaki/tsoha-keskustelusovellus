@@ -3,7 +3,7 @@ import React, { useState, useContext } from 'react'
 import { SmallButton } from '../../../assets/styles'
 import { editPost, deletePost } from '../../../services/posts'
 import { removeImage } from '../../../services/images'
-import { UserContext } from '../../UserProvider'
+import { UserContext } from '../../user/UserProvider'
 import AddImage from './AddImage'
 
 const PostButtons = ({ post, updatePosts }) => {

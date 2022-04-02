@@ -4,7 +4,7 @@ import { Formik, Form } from 'formik'
 
 import { FormWrapper, Title, TextField, Button } from '../../assets/styles'
 import { getPosts, makePost } from '../../services/posts'
-import { UserContext } from '../UserProvider'
+import { UserContext } from '../user/UserProvider'
 
 const MakePost = ({ setPosts }) => {
   const [user] = useContext(UserContext)

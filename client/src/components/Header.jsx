@@ -2,17 +2,17 @@ import React, { useContext } from 'react'
 
 import { HeaderWrapper, HeaderLink } from '../assets/styles'
 import { logoutUser } from '../services/login'
-import { UserContext } from './UserProvider'
+import { UserContext } from './user/UserProvider'
 
 const Header = () => {
   const [user, setUser] = useContext(UserContext)
 
   return (
     <HeaderWrapper>
-      <HeaderLink to="/">Forum</HeaderLink>
+      <HeaderLink to="/">Boards</HeaderLink>
       {user
         ? <>
-          <HeaderLink to="/user">{user.username}</HeaderLink>
+          <HeaderLink to={`/user/${user.id}`}>{user.username}</HeaderLink>
           <HeaderLink to="/" onClick={() => logoutUser(setUser)}>
             Logout
           </HeaderLink>
