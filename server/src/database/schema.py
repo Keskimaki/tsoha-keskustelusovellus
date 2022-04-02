@@ -63,12 +63,3 @@ CREATE_IMAGE_TABLE = """
         data BYTEA NOT NULL
     );
 """
-
-CREATE_PROFILE_PICTURE_TABLE = """
-    CREATE TABLE ProfilePictures (
-        id SERIAL PRIMARY KEY,
-        user_id INTEGER REFERENCES Users NOT NULL,
-        name TEXT NOT NULL,
-        data BYTEA NOT NULL
-    );
-"""
