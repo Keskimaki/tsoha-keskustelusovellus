@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { SmallButton } from '../../assets/styles'
-import { BASE_URI } from '../../config'
+import { SmallButton } from '../../../assets/styles'
+import { BASE_URI } from '../../../config'
 
 const AddImage = ({ postId, updatePosts, setImageFocus }) => {
   const handleImageAddition = async () => {

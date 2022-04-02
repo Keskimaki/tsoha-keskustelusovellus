@@ -1,43 +1,10 @@
 import React, { useState, useContext } from 'react'
 
-import { Wrapper, Text, SecondaryText, SmallButton, Image, LargeImage } from '../../assets/styles'
+import { SmallButton } from '../../../assets/styles'
+import { editPost, deletePost } from '../../../services/posts'
+import { removeImage } from '../../../services/images'
+import { UserContext } from '../../UserProvider'
 import AddImage from './AddImage'
-import { editPost, deletePost } from '../../services/posts'
-import { removeImage } from '../../services/images'
-import { UserContext } from '../UserProvider'
-import { BASE_URI } from '../../config'
-
-const Post = ({ post, updatePosts }) => {
-  const [user] = useContext(UserContext)
-
-  return (
-      <Wrapper>
-        <strong>{post.username}</strong> <SecondaryText>{post.time}</SecondaryText>
-        <Text>{post.content}</Text>
-        {user && user.id === post.user_id &&
-          <PostButtons post={post} updatePosts={updatePosts} />}
-        {post.image && <PostImage postId={post.id} />}
-        {post.edit !== 'None' &&
-          <SecondaryText>edited {post.edit.substring(0, 19)}</SecondaryText>}
-      </Wrapper>
-  )
-}
-
-const PostImage = ({ postId }) => {
-  const [imageFocus, setImageFocus] = useState(false)
-
-  return (
-    <div>
-      {imageFocus
-        ? <LargeImage
-          onClick={() => setImageFocus(!imageFocus)}
-          src={`${BASE_URI}/images/${postId}`} />
-        : <Image
-          onClick={() => setImageFocus(!imageFocus)}
-          src={`${BASE_URI}/images/${postId}`} />}
-    </div>
-  )
-}
 
 const PostButtons = ({ post, updatePosts }) => {
   const [imageFocus, setImageFocus] = useState(false)
@@ -84,4 +51,4 @@ const PostButtons = ({ post, updatePosts }) => {
   )
 }
 
-export default Post
+export default PostButtons

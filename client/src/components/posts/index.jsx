@@ -3,7 +3,7 @@ import { useParams } from 'react-router'
 
 import { Title } from '../../assets/styles'
 import { getPosts } from '../../services/posts'
-import Post from './Post'
+import Post from './post'
 import MakePost from './MakePost'
 
 const Posts = () => {
