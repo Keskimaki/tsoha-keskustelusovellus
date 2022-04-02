@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { Title, SmallButton } from '../../assets/styles'
 import { getPosts } from '../../services/posts'
-import { editThread } from '../../services/threads'
+import { editThread, deleteThread } from '../../services/threads'
 import Post from './post'
 import MakePost from './MakePost'
 import { UserContext } from '../UserProvider'
@@ -57,10 +57,20 @@ const ThreadButtons = () => {
     navigate(`/${boardName}/${name}`)
   }
 
+  const handleThreadDeletion = async () => {
+    if (!window.confirm('Are you sure you want to delete this thread?')) {
+      return
+    }
+
+    await deleteThread(user.token, threadName)
+
+    navigate('/')
+  }
+
   return (
     <div>
         <SmallButton onClick={handleThreadNameEditing}>Edit</SmallButton>
-        <SmallButton>Delete</SmallButton>
+        <SmallButton onClick={handleThreadDeletion}>Delete</SmallButton>
     </div>
   )
 }

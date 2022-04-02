@@ -35,6 +35,14 @@ export const editThread = async (token, threadName, name) => {
   return res.data
 }
 
+export const deleteThread = async (token, threadName) => {
+  const auth = { headers: { Authorization: token } }
+  const threadId = await getThreadId(threadName)
+
+  const res = await axios.delete(`${BASE_URI}/threads/${threadId}`, auth)
+  return res.data
+}
+
 const getBoardId = async boardName => {
   const res = await axios.get(`${BASE_URI}/boards/${boardName}`)
   return res.data.id
