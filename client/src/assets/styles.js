@@ -32,7 +32,7 @@ export const Wrapper = styled.div`
   color: white;
   background-color: #4d4d4d;
   font-size: 1.5em;
-  margin: 0.5em 1em;
+  margin: 1em;
   border-radius: 0.5em;
   padding: 1em;
 `
@@ -64,20 +64,20 @@ export const SecondaryTextRight = styled(SecondaryText)`
 `
 
 export const Button = styled.button`
-  background: dodgerblue;
+  background: #004d99;
   color: white;
   font-size: 1em;
   margin: 0.5em;
   padding: 0.25em 1em;
-  border: 2px solid dodgerblue;
+  border: 2px solid #004d99;
   border-radius: 0.5em;
 `
 
 export const SmallButton = styled.button`
-  background: dodgerblue;
+  background: #004d99;
   color: white;
   margin: 0.5em 0.5em 0.5em 0em;
-  border: 2px solid dodgerblue;
+  border: 2px solid #004d99;
   border-radius: 0.5em;
 `
 
