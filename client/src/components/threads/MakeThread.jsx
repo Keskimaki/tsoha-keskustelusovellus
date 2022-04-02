@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { Formik, Form } from 'formik'
 
 import { FormWrapper, Title, TextField, Button } from '../../assets/styles'
@@ -7,6 +7,7 @@ import { getThreads, makeThread } from '../../services/threads'
 import { UserContext } from '../user/UserProvider'
 
 const MakeThread = ({ setThreads }) => {
+  const navigate = useNavigate()
   const [user] = useContext(UserContext)
   const { boardName } = useParams()
 
@@ -16,7 +17,7 @@ const MakeThread = ({ setThreads }) => {
     const data = await getThreads(boardName)
     setThreads(data)
 
-    resetForm()
+    navigate(`/${boardName}/${name}`)
   }
 
   if (!user) {
