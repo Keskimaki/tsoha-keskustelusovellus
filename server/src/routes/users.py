@@ -12,7 +12,7 @@ from database import queries
 @app.route("/api/users", methods=["GET"])
 def get_users():
     """Return all users as JSON"""
-    users = query_db("SELECT * FROM Users;")
+    users = query_db(queries.GET_ALL_USERS)
 
     return json_response(users)
 
