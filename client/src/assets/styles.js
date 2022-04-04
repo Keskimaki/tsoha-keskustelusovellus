@@ -97,11 +97,6 @@ export const TextField = styled(Field)`
   margin: 0.5em;
 `
 
-export const TextInput = styled(TextField)`
-  font-size: 2em;
-  border-radius: 0.5em;
-`
-
 export const FooterWrapper = styled.footer`
   width: 100vw;
   margin-top: auto;
