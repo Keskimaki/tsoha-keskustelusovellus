@@ -11,7 +11,7 @@ const Search = () => {
   useEffect(async () => {
     const data = await getAllPosts()
     setPosts(data.sort((a, b) => b.id - a.id))
-  })
+  }, [])
 
   return (
     <div>

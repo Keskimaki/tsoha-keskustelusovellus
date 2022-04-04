@@ -10,6 +10,7 @@ const Header = () => {
   return (
     <HeaderWrapper>
       <HeaderLink to="/">Boards</HeaderLink>
+      <HeaderLink to="/search">Search</HeaderLink>
       {user
         ? <>
           <HeaderLink to={`/user/${user.id}`}>{user.username}</HeaderLink>

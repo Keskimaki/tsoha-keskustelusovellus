@@ -99,6 +99,7 @@ export const TextField = styled(Field)`
 
 export const TextInput = styled(TextField)`
   font-size: 2em;
+  border-radius: 0.5em;
 `
 
 export const FooterWrapper = styled.footer`
