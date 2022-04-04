@@ -2,6 +2,11 @@ import axios from 'axios'
 
 import { BASE_URI } from '../config'
 
+export const getAllPosts = async () => {
+  const res = await axios.get(`${BASE_URI}/posts`)
+  return res.data
+}
+
 export const getPosts = async threadName => {
   const threadId = await getThreadId(threadName)
 
