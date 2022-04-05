@@ -9,6 +9,7 @@ from app import app
 from services.db import query_db, insert_into_db
 from services.user import check_admin
 from services.response import json_response
+from services.parser import parse_post
 from database import queries
 
 @app.route("/api/posts", methods=["GET"])
@@ -40,14 +41,11 @@ def get_post(post_id):
 @jwt_required()
 def create_post():
     """Logged user can create a new post"""
-    body = request.json
+    post = parse_post(request.json)
 
-    insert_into_db(
-        queries.CREATE_POST,
-        ( body["user_id"], body["thread_id"], body["content"] )
-    )
+    insert_into_db(queries.CREATE_POST, post)
 
-    return { "msg": f"Post '{body['content']}' created" }, 201
+    return { "msg": f"Post '{post[2]}' created" }, 201
 
 @app.route("/api/posts/<int:post_id>", methods=["PUT"])
 @jwt_required()

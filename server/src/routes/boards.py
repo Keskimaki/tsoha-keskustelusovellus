@@ -7,6 +7,7 @@ from app import app
 from services.db import query_db, insert_into_db
 from services.user import check_admin
 from services.response import json_response
+from services.parser import parse_board
 from database import queries
 
 @app.route("/api/boards", methods=["GET"])
@@ -43,14 +44,11 @@ def create_board():
     if not check_admin():
         return { "msg": "Administrator privileges required" }, 401
 
-    body = request.json
+    board = parse_board(request.json)
 
-    if not "private" in body:
-        body["private"] = False
+    insert_into_db(queries.CREATE_BOARD, board)
 
-    insert_into_db(queries.CREATE_BOARD, ( body["name"], body["description"], body["private"] ))
-
-    return { "msg": f"Board {body['name']} created" }, 201
+    return { "msg": f"Board {board[0]} created" }, 201
 
 @app.route("/api/boards/<int:board_id>", methods=["PUT"])
 @jwt_required()

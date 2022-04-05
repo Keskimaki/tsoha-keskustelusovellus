@@ -7,6 +7,7 @@ from app import app
 from services.db import query_db, insert_into_db
 from services.user import check_admin
 from services.response import json_response
+from services.parser import parse_thread
 from database import queries
 
 @app.route("/api/threads", methods=["GET"])
@@ -48,11 +49,11 @@ def get_thread_id(thread_name):
 @jwt_required()
 def create_thread():
     """Logged user can create a new thread"""
-    body = request.json
+    thread = parse_thread(request.json)
 
-    insert_into_db(queries.CREATE_THREAD, ( body["user_id"], body["board_id"], body["name"] ))
+    insert_into_db(queries.CREATE_THREAD, thread)
 
-    return { "msg": f"Thread {body['name']} created" }, 201
+    return { "msg": f"Thread {thread[2]} created" }, 201
 
 @app.route("/api/threads/<int:thread_id>", methods=["PUT"])
 @jwt_required()
