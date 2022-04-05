@@ -1,3 +1,6 @@
+"""Parsers for user inputs"""
+# pylint: disable=missing-function-docstring
+
 from datetime import datetime
 
 from app import bcrypt
@@ -9,11 +12,11 @@ def parse_string(string, name):
 
     return string
 
-def parse_id(id, name):
-    if not id or not isinstance(id, int):
+def parse_id(some_id, name):
+    if not id or not isinstance(some_id, int):
         raise Exception(f"{name} must be an integer")
 
-    return id
+    return some_id
 
 def parse_boolean(boolean):
     if boolean is None or not isinstance(boolean, bool):
@@ -26,7 +29,7 @@ def parse_username(username):
 
     if len(username) < 4:
         raise Exception("Username must be at least 4 characters long")
-    
+
     return username
 
 def parse_password(password):
@@ -35,9 +38,9 @@ def parse_password(password):
     if len(password) < 8:
         raise Exception("Password must be at least 8 characters long")
 
-    hash = bcrypt.generate_password_hash(password).decode("utf-8")
+    password_hash = bcrypt.generate_password_hash(password).decode("utf-8")
 
-    return hash
+    return password_hash
 
 def parse_board(body):
     board = (

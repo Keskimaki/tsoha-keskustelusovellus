@@ -62,7 +62,7 @@ def edit_board(board_id):
     if not board:
         return { "msg": "Board not found" }, 404
 
-    edit = parse_board_edit(request.json)
+    edit = parse_board_edit(request.json, board_id)
 
     insert_into_db(queries.EDIT_BOARD, edit)
 
