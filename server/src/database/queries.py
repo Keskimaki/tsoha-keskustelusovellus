@@ -97,7 +97,9 @@ EDIT_BOARD = "UPDATE Boards SET name=%s, description=%s, private=%s, access=%s W
 
 DELETE_BOARD = "DELETE FROM Boards WHERE id=%s;"
 
-GET_ALL_USERS = """SELECT id, username, admin, time FROM Users;"""
+GET_ALL_USERS = "SELECT id, username, admin, time FROM Users;"
+
+CREATE_USER = "INSERT INTO Users (username, password_hash) VALUES (%s, %s);"
 
 GET_USER_BY_ID = "SELECT id, username, admin, time FROM Users WHERE id=%s;"
 
