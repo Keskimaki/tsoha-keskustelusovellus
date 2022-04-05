@@ -57,6 +57,14 @@ def parse_thread(body):
 
     return thread
 
+def parse_thread_edit(body, thread_id):
+    edit = (
+        parse_string(body["name"], "Name"),
+        parse_id(thread_id, "Thread ID")
+    )
+
+    return edit
+
 def parse_post(body):
     post = (
         parse_id(body["user_id"], "User ID"),

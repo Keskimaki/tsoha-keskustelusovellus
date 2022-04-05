@@ -7,7 +7,7 @@ from app import app
 from services.db import query_db, insert_into_db
 from services.user import check_admin
 from services.response import json_response
-from services.parser import parse_thread
+from services.parser import parse_thread, parse_thread_edit
 from database import queries
 
 @app.route("/api/threads", methods=["GET"])
@@ -65,9 +65,10 @@ def edit_thread(thread_id):
         return { "msg": "Thread not found" }, 404
 
     body = request.json
+    edit = parse_thread_edit(body, thread_id)
 
     if "name" in body:
-        insert_into_db(queries.EDIT_THREAD_NAME, ( body["name"], thread_id ))
+        insert_into_db(queries.EDIT_THREAD_NAME, edit)
 
     if check_admin() and "closed" in body:
         insert_into_db(queries.EDIT_THREAD_STATUS, ( body["closed"], thread_id ))
