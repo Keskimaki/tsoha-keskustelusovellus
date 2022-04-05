@@ -11,9 +11,18 @@ const MakeUser = () => {
   const navigate = useNavigate()
 
   const handleAccountCreation = async ({ username, password, repeatPassword }) => {
-    // TODO username length and password quality checks, maybe move to backend?
+    if (username.length < 4) {
+      window.alert('Username must be at least 4 characters long')
+      return
+    }
+
+    if (password.length < 8) {
+      window.alert('Password must be at least 8 characters long')
+      return
+    }
+
     if (password !== repeatPassword) {
-      console.log('Password and and repeat must match')
+      window.alert('Password and and repeat must match')
       return
     }
 
@@ -30,9 +39,9 @@ const MakeUser = () => {
         initialValues={{ username: '', password: '', repeatPassword: '' }}
         onSubmit={handleAccountCreation}>
           <Form>
-            <TextField name="username" placeholder="username" type="text" /> <br />
-            <TextField name="password" placeholder="password" type="password" /> <br />
-            <TextField name="repeatPassword" placeholder="repeat password" type="password" /> <br />
+            <TextField name="username" placeholder="username" type="text" required /> <br />
+            <TextField name="password" placeholder="password" type="password" required /> <br />
+            <TextField name="repeatPassword" placeholder="repeat password" type="password" required /> <br />
             <Button type="submit">Create Account</Button>
           </Form>
       </Formik>
