@@ -15,7 +15,6 @@ export const loginUser = async (username, password) => {
 }
 
 export const logoutUser = setUser => {
-  // TODO clear token in backend
   window.localStorage.removeItem('tsohaUser')
   setUser(undefined)
 }
