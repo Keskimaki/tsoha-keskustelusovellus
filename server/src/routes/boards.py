@@ -7,7 +7,7 @@ from app import app
 from services.db import query_db, insert_into_db
 from services.user import check_admin
 from services.response import json_response
-from services.parser import parse_board
+from services.parser import parse_board, parse_board_edit
 from database import queries
 
 @app.route("/api/boards", methods=["GET"])
@@ -62,14 +62,11 @@ def edit_board(board_id):
     if not board:
         return { "msg": "Board not found" }, 404
 
-    body = request.json
+    edit = parse_board_edit(request.json)
 
-    insert_into_db(
-        queries.EDIT_BOARD,
-        ( body["name"], body["description"], board_id )
-    )
+    insert_into_db(queries.EDIT_BOARD, edit)
 
-    return { "msg": f"Board {body['name']} edited" }
+    return { "msg": f"Board {edit[0]} edited" }
 
 @app.route("/api/boards/<int:board_id>", methods=["DELETE"])
 @jwt_required()

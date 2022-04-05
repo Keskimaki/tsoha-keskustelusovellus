@@ -47,6 +47,15 @@ def parse_board(body):
 
     return board
 
+def parse_board_edit(body, board_id):
+    edit = (
+        parse_string(body["name"], "Name"),
+        parse_string(body["description"], "Description"),
+        parse_id(board_id, "Board ID")
+    )
+
+    return edit
+
 def parse_thread(body):
     thread = (
         parse_id(body["user_id"], "User ID"),
