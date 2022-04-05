@@ -25,8 +25,6 @@ CREATE_BOARD_TABLE = """
         id SERIAL PRIMARY KEY,
         name TEXT NOT NULL UNIQUE,
         description TEXT NOT NULL,
-        private BOOLEAN DEFAULT FALSE,
-        access INTEGER[] DEFAULT '{}',
         time TIMESTAMP DEFAULT CURRENT_TIMESTAMP(0)
     );
 """

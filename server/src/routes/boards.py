@@ -66,7 +66,7 @@ def edit_board(board_id):
 
     insert_into_db(
         queries.EDIT_BOARD,
-        ( body["name"], body["description"], body["private"], body["access"], board_id )
+        ( body["name"], body["description"], board_id )
     )
 
     return { "msg": f"Board {body['name']} edited" }

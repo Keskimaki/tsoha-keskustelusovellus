@@ -91,9 +91,9 @@ GET_BOARD_BY_ID = "SELECT * FROM Boards WHERE id=%s;"
 
 GET_BOARD_ID_BY_NAME = "SELECT id FROM Boards WHERE name=%s;"
 
-CREATE_BOARD = "INSERT INTO Boards (name, description, private) VALUES (%s, %s, %s);"
+CREATE_BOARD = "INSERT INTO Boards (name, description) VALUES (%s, %s);"
 
-EDIT_BOARD = "UPDATE Boards SET name=%s, description=%s, private=%s, access=%s WHERE id=%s;"
+EDIT_BOARD = "UPDATE Boards SET name=%s, description=%s WHERE id=%s;"
 
 DELETE_BOARD = "DELETE FROM Boards WHERE id=%s;"
 

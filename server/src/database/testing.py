@@ -16,13 +16,13 @@ def insert_test_data(cur):
     )
 
     cur.execute(
-       "INSERT INTO Boards (name, description, private) VALUES (%s, %s, %s);",
-        ( "TEST", "testing area", True )
+       "INSERT INTO Boards (name, description) VALUES (%s, %s);",
+        ( "TEST", "testing area" )
     )
 
     cur.execute(
         "INSERT INTO Threads (user_id, board_id, name, closed) VALUES (%s, %s, %s, %s);",
-        ( 1, 1, "testing thread", True )
+        ( 1, 1, "testing thread", False )
     )
 
     cur.execute(

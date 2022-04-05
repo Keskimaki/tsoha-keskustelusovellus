@@ -43,7 +43,6 @@ def parse_board(body):
     board = (
         parse_string(body["name"], "Name"),
         parse_string(body["description"], "Description"),
-        parse_boolean(body["private"]),
     )
 
     return board
