@@ -28,7 +28,7 @@ const MakePost = ({ updatePosts }) => {
         initialValues={{ content: '' }}
         onSubmit={handlePostCreation}>
         <Form>
-          <TextField name="content" placeholder="content" type="text" /> <br />
+          <TextField name="content" placeholder="content" type="text" required /> <br />
           <Button primary type="submit">Post</Button>
         </Form>
       </Formik>

@@ -11,7 +11,7 @@ const MakeThread = ({ setThreads }) => {
   const [user] = useContext(UserContext)
   const { boardName } = useParams()
 
-  const handleThreadCreation = async ({ name, content }, { resetForm }) => {
+  const handleThreadCreation = async ({ name, content }) => {
     await makeThread(user.token, user.id, boardName, name, content)
 
     const data = await getThreads(boardName)
@@ -31,8 +31,8 @@ const MakeThread = ({ setThreads }) => {
         initialValues={{ name: '', content: '' }}
         onSubmit={handleThreadCreation}>
         <Form>
-          <TextField name="name" placeholder="title" type="text" /> <br />
-          <TextField name="content" placeholder="content" type="text" /> <br />
+          <TextField name="name" placeholder="title" type="text" required /> <br />
+          <TextField name="content" placeholder="content" type="text" required /> <br />
           <Button primary type="submit">Make thread</Button>
         </Form>
       </Formik>

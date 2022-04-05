@@ -14,6 +14,11 @@ const Login = () => {
   const handleLogin = async ({ username, password }) => {
     const data = await loginUser(username, password)
 
+    if (!data) {
+      window.alert('Wrong username or password')
+      return
+    }
+
     updateUser(context, data)
     navigate('/')
   }
@@ -25,8 +30,8 @@ const Login = () => {
         initialValues={{ username: '', password: '' }}
         onSubmit={handleLogin}>
         <Form>
-          <TextField name="username" placeholder="username" type="text" /> <br />
-          <TextField name="password" placeholder="password" type="password" /> <br />
+          <TextField name="username" placeholder="username" type="text" required /> <br />
+          <TextField name="password" placeholder="password" type="password" required /> <br />
           <Button primary type="submit">Login</Button>
         </Form>
       </Formik>
