@@ -90,3 +90,11 @@ def parse_user(body):
     )
 
     return user
+
+def parse_login(body):
+    login = (
+        parse_string(body["username"], "Username"),
+        parse_string(body["password"], "Password")
+    )
+
+    return login
