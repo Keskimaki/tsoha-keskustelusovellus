@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from app import bcrypt
 
 def parse_string(string, name):
@@ -63,6 +65,15 @@ def parse_post(body):
     )
 
     return post
+
+def parse_post_edit(body, post_id):
+    edit = (
+        parse_string(body["content"], "Content"),
+        datetime.now(),
+        parse_id(post_id, "Post ID")
+    )
+
+    return edit
 
 def parse_user(body):
     user = (

@@ -1,7 +1,5 @@
 """Router for post related api requests"""
 
-from datetime import datetime
-
 from flask import request
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
@@ -9,7 +7,7 @@ from app import app
 from services.db import query_db, insert_into_db
 from services.user import check_admin
 from services.response import json_response
-from services.parser import parse_post
+from services.parser import parse_post, parse_post_edit
 from database import queries
 
 @app.route("/api/posts", methods=["GET"])
@@ -56,11 +54,11 @@ def edit_post(post_id):
     if not post:
         return { "msg": "Post not found" }, 404
 
-    body = request.json
-    if "content" in body:
-        insert_into_db(queries.UPDATE_POST, ( body["content"], datetime.now(), post_id ))
+    edit = parse_post_edit(request.json, post_id)
 
-    return { "msg": f"Post '{body['content']}' edited" }
+    insert_into_db(queries.UPDATE_POST, edit)
+
+    return { "msg": f"Post '{edit[0]}' edited" }
 
 @app.route("/api/posts/<int:post_id>", methods=["DELETE"])
 @jwt_required()
