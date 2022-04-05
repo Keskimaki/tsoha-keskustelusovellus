@@ -13,7 +13,7 @@ const Threads = () => {
 
   useEffect(async () => {
     const data = await getThreads(boardName)
-    setThreads(data.sort((a, b) => b.id - a.id))
+    setThreads(data.filter(thread => !thread.closed).sort((a, b) => b.id - a.id))
   }, [])
 
   return (

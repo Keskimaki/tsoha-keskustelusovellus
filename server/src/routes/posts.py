@@ -17,6 +17,10 @@ def get_posts():
     user_id = request.args.get("user_id")
 
     if thread_id:
+        thread = query_db(queries.GET_THREAD_BY_ID, ( thread_id, ), True)
+        if thread["closed"]:
+            return { "msg": "Thread is closed" }, 403
+
         posts = query_db(queries.GET_POSTS_BY_THREAD_ID, ( thread_id, ))
     elif user_id:
         posts = query_db(queries.GET_POSTS_BY_USER_ID, ( user_id, ))

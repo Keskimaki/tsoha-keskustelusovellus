@@ -65,9 +65,9 @@ def edit_thread(thread_id):
         return { "msg": "Thread not found" }, 404
 
     body = request.json
-    edit = parse_thread_edit(body, thread_id)
 
     if "name" in body:
+        edit = parse_thread_edit(body, thread_id)
         insert_into_db(queries.EDIT_THREAD_NAME, edit)
 
     if check_admin() and "closed" in body:
