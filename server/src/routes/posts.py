@@ -41,6 +41,11 @@ def create_post():
     """Logged user can create a new post"""
     post = parse_post(request.json)
 
+    thread = query_db(queries.GET_THREAD_BY_ID, ( str(post[1]), ), True)
+
+    if thread["closed"]:
+        return { "msg": "Thread is closed" }, 403
+
     insert_into_db(queries.CREATE_POST, post)
 
     return { "msg": f"Post '{post[2]}' created" }, 201
