@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 
 COPY poetry.lock pyproject.toml ./
 
-RUN apk add --no-cache gcc libffi-dev musl-dev postgresql-dev && \
+RUN apk add --update --no-cache gcc libffi-dev musl-dev postgresql-dev && \
     pip install poetry && poetry install
 
 COPY . .

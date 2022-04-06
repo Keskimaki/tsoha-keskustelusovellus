@@ -5,7 +5,7 @@ description = "Flask based messaging application"
 authors = ["Miko Keskimäki <miko.keskimaki@helsinki.fi>"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.9"
 Flask = "^2.0.3"
 psycopg2-binary = "^2.9.3"
 python-dotenv = "^0.19.2"
