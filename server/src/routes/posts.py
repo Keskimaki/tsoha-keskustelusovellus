@@ -32,7 +32,7 @@ def get_posts():
 @app.route("/api/posts/<int:post_id>", methods=["GET"])
 def get_post(post_id):
     """Return a single post by id"""
-    post = query_db(queries.GET_POST_BY_ID, ( str(post_id), ), True)
+    post = query_db(queries.GET_POST_BY_ID, ( post_id, ), True)
 
     if not post:
         return { "msg": "Post not found" }, 404
@@ -45,7 +45,7 @@ def create_post():
     """Logged user can create a new post"""
     post = parse_post(request.json)
 
-    thread = query_db(queries.GET_THREAD_BY_ID, ( str(post[1]), ), True)
+    thread = query_db(queries.GET_THREAD_BY_ID, ( post[1], ), True)
 
     if thread["closed"]:
         return { "msg": "Thread is closed" }, 403
@@ -84,8 +84,6 @@ def delete_post(post_id):
 
 def check_and_get_post(post_id):
     """Query database for post with given id if user is admin or post owner"""
-    post_id = str(post_id)
-
     if check_admin():
         post = query_db(queries.GET_POST_BY_ID, ( post_id, ), True)
     else:

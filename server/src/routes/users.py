@@ -20,7 +20,7 @@ def get_users():
 @app.route("/api/users/<int:user_id>", methods=["GET"])
 def get_user(user_id):
     """Return a single user by id"""
-    user = query_db(queries.GET_USER_BY_ID, ( str(user_id), ), True)
+    user = query_db(queries.GET_USER_BY_ID, ( user_id, ), True)
 
     if not user:
         return { "msg": "User not found" }, 404

@@ -28,7 +28,7 @@ def get_threads():
 @app.route("/api/threads/<int:thread_id>", methods=["GET"])
 def get_thread(thread_id):
     """Return a single thread by id"""
-    thread = query_db(queries.GET_THREAD_BY_ID, ( str(thread_id), ), True)
+    thread = query_db(queries.GET_THREAD_BY_ID, ( thread_id, ), True)
 
     if not thread:
         return { "msg": "Thread not found" }, 404
@@ -92,8 +92,6 @@ def delete_thread(thread_id):
 
 def check_and_get_thread(thread_id):
     """Query database for thread with given id if user is admin or thread owner"""
-    thread_id = str(thread_id)
-
     if check_admin():
         thread = query_db("SELECT * FROM Threads WHERE id=%s;", ( thread_id, ), True)
     else:

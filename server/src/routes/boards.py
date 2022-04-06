@@ -20,7 +20,7 @@ def get_boards():
 @app.route("/api/boards/<int:board_id>", methods=["GET"])
 def get_board(board_id):
     """Return a single board by id"""
-    board = query_db(queries.GET_BOARD_BY_ID, ( str(board_id), ), True)
+    board = query_db(queries.GET_BOARD_BY_ID, ( board_id, ), True)
 
     if not board:
         return { "msg": "Board not found" }, 404
@@ -57,7 +57,7 @@ def edit_board(board_id):
     if not check_admin():
         return { "msg": "Administrator privileges required" }, 401
 
-    board = query_db(queries.GET_BOARD_BY_ID, ( str(board_id), ), True)
+    board = query_db(queries.GET_BOARD_BY_ID, ( board_id, ), True)
 
     if not board:
         return { "msg": "Board not found" }, 404
@@ -75,7 +75,7 @@ def delete_board(board_id):
     if not check_admin():
         return { "msg": "Administrator privileges required" }, 401
 
-    board = query_db(queries.GET_BOARD_BY_ID, ( str(board_id), ), True)
+    board = query_db(queries.GET_BOARD_BY_ID, ( board_id, ), True)
 
     if not board:
         return { "msg": "Board not found" }, 404

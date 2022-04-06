@@ -10,7 +10,7 @@ from database import queries
 @app.route("/api/images/<int:post_id>", methods=["GET"])
 def get_image(post_id):
     """Return image by post id"""
-    image = query_db(queries.GET_IMAGE_BY_POST_ID, ( str(post_id), ), True)
+    image = query_db(queries.GET_IMAGE_BY_POST_ID, ( post_id, ), True)
 
     if not image:
         return { "msg": "Image not found" }, 404
@@ -25,8 +25,6 @@ def get_image(post_id):
 @app.route("/api/images/<int:post_id>", methods=["POST"])
 def upload_image(post_id):
     """User can upload image to post"""
-    post_id = str(post_id)
-
     file = request.files["file"]
 
     if not file:
@@ -44,8 +42,6 @@ def upload_image(post_id):
 @jwt_required()
 def remove_image(post_id):
     """User can remove image from post"""
-    post_id = str(post_id)
-
     image = query_db(queries.GET_IMAGE_BY_POST_ID, ( post_id, ), True)
 
     if not image:
