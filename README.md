@@ -29,3 +29,5 @@ Database initialization will create users Admin and TestUser with the correspond
 - Ylläpitäjä voi muokata ja poistaa alueita.
 - Ylläpitäjä voi muokata ja poistaa mitä vain ketjuja ja viestejä.
 - Ylläpitäjä voi sulkea ketjun.
+
+Sovellus on toiminnassa osoitteessa https://tsohasovellus.herokuapp.com.
