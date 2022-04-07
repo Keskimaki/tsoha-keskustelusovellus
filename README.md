@@ -1,10 +1,19 @@
+![GitHub Actions](https://github.com/Keskimaki/tsoha-keskustelusovellus/workflows/Pipeline/badge.svg)
+
 # tsoha-keskustelusovellus
 Tietokantasovellus 2022 kevät
 
 ## Usage
+Replace [the template file](server/env.template) with a .env file. 
+
 Launch the app in development mode by running `docker-compose up` in the root folder.
 
 By default the client will run on port 3000 and the server on port 5000.
+
+
+To initialize the PostgreSQL database run `docker exec tsoha_server_1 poetry run python3 src/database/init_db.py` while the app is running.
+
+Database initialization will create users Admin and TestUser with the corresponding privileges. Their passwords will be the same as the DB_PASSWORD defined in the .env file. Testing board with a thread and a post will also be created.
 
 ## Ominaisuudet
 
@@ -18,5 +27,5 @@ By default the client will run on port 3000 and the server on port 5000.
 - Käyttäjä voi hakea viestejä niiden sisällön perusteella.
 - Ylläpitäjä voi luoda uusia alueita.
 - Ylläpitäjä voi muokata ja poistaa alueita.
-- Ylläpitäjä voi muokata ja poistaa minkä vain ketjun tai viestin.
+- Ylläpitäjä voi muokata ja poistaa mitä vain ketjuja ja viestejä.
 - Ylläpitäjä voi sulkea ketjun.
