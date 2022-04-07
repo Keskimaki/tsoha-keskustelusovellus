@@ -19,8 +19,8 @@ const Posts = () => {
     setPosts(data.sort((a, b) => a.id - b.id))
   }
 
-  useEffect(async () => {
-    await updatePosts()
+  useEffect(() => {
+    updatePosts()
   }, [])
 
   return (

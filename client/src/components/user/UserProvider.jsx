@@ -22,8 +22,8 @@ const UserProvider = props => {
     }
   }
 
-  useEffect(async () => {
-    await updateLoginStatus()
+  useEffect(() => {
+    updateLoginStatus()
   }, [])
 
   return (

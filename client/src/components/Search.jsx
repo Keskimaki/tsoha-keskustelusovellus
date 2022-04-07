@@ -8,9 +8,12 @@ const Search = () => {
   const [search, setSearch] = useState('')
   const [posts, setPosts] = useState([])
 
-  useEffect(async () => {
-    const data = await getAllPosts()
-    setPosts(data.sort((a, b) => b.id - a.id))
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getAllPosts()
+      setPosts(data.sort((a, b) => b.id - a.id))
+    }
+    fetchData()
   }, [])
 
   return (

@@ -7,9 +7,12 @@ import Board from './Board'
 const Boards = () => {
   const [boards, setBoards] = useState([])
 
-  useEffect(async () => {
-    const data = await getBoards()
-    setBoards(data)
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getBoards()
+      setBoards(data)
+    }
+    fetchData()
   }, [])
 
   return (

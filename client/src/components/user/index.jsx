@@ -10,9 +10,12 @@ const User = () => {
 
   const { userId } = useParams()
 
-  useEffect(async () => {
-    const data = await getPostsByUser(userId)
-    setPosts(data.sort((a, b) => b.id - a.id))
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getPostsByUser(userId)
+      setPosts(data.sort((a, b) => b.id - a.id))
+    }
+    fetchData()
   }, [])
 
   if (posts.length === 0) {

@@ -11,9 +11,12 @@ const Threads = () => {
 
   const { boardName } = useParams()
 
-  useEffect(async () => {
-    const data = await getThreads(boardName)
-    setThreads(data.filter(thread => !thread.closed).sort((a, b) => b.id - a.id))
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getThreads(boardName)
+      setThreads(data.filter(thread => !thread.closed).sort((a, b) => b.id - a.id))
+    }
+    fetchData()
   }, [])
 
   return (
