@@ -12,13 +12,10 @@ COPY client client
 
 RUN cd client && npm run build
 
+RUN apt-get update && apt-get install -y python3-pip
 
-COPY server/poetry.lock server/pyproject.toml server/
-
-RUN apt-get update && apt-get install -y python3-pip && pip install poetry
-
-RUN cd server && poetry install
+RUN pip install Flask Flask-Cors Flask-Bcrypt Flask-JWT-Extended psycopg2-binary python-dotenv
 
 COPY server server
 
-CMD cd server && FLASK_ENV=production poetry run python3 -m flask run --host=0.0.0.0
+CMD cd server && FLASK_ENV=production python3 -m flask run --host=0.0.0.0 --port=$PORT
