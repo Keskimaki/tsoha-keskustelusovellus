@@ -13,7 +13,7 @@ If you're having issues with the database starting add the POSTGRES_PASSWORD, US
 By default the client will run on port 3000 and the server on port 5000.
 
 
-To initialize the PostgreSQL database run `docker exec tsoha_server_1 poetry run python3 src/database/init_db.py` while the app is running.
+To initialize the PostgreSQL database run `docker exec tsoha-keskustelusovellus_server_1 poetry run python3 src/database/init_db.py` while the app is running.
 
 Database initialization will create users Admin and TestUser with the corresponding privileges. Their passwords will be the same as the DB_PASSWORD defined in the .env file. Testing board with a thread and a post will also be created.
 
