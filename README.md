@@ -8,6 +8,8 @@ Replace [the template file](server/env.template) with a .env file.
 
 Launch the app in development mode by running `docker-compose up` in the root folder.
 
+If you're having issues with the database starting add the POSTGRES_PASSWORD, USER and DB variables manually to the [docker-compose.yml](docker-compose.yml).
+
 By default the client will run on port 3000 and the server on port 5000.
 
 
